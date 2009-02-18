@@ -13,7 +13,7 @@
 **			Quan, Phan 	(anhquan.phanle@gmail.com)
 ********************************************************************************
 **
-**	OneLoop4Pt main entry functions
+**	level 2 functions
 **
 ********************************************************************************
 **
@@ -25,18 +25,18 @@
 *******************************************************************************/
 
 
-#ifndef __XLOOPS_ONELOOP_4PT_H__
-#define __XLOOPS_ONELOOP_4PT_H__
+#ifndef __XLOOPS_ONELOOP_4PT_LEV2_H__
+#define __XLOOPS_ONELOOP_4PT_LEV2_H__
 
 #include <ginac/ginac.h>
 
 using namespace std;
-using namespace GiNaC;
 
 namespace xloops{
-	//	III.8	Level 8 Function
-	ex fn_1Loop4Pt();
-	ex fn_1Loop4Pt(const ex& q_, const ex& m_, const ex& Rho, const ex& Rho1, const ex& Rho2);
+
+	//	III.2	Level 2 Variable Functions
+	ex fn_AC (int l, int k);
+	ex fn_alpha (int l, int k);
 }	// Namespace xloops
 
-#endif 	// __XLOOPS_ONELOOP_4PT_H__
+#endif 	// __XLOOPS_ONELOOP_4PT_LEV2_H__

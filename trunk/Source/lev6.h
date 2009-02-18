@@ -13,7 +13,7 @@
 **			Quan, Phan 	(anhquan.phanle@gmail.com)
 ********************************************************************************
 **
-**	OneLoop4Pt main entry functions
+**	level 6 functions
 **
 ********************************************************************************
 **
@@ -25,18 +25,31 @@
 *******************************************************************************/
 
 
-#ifndef __XLOOPS_ONELOOP_4PT_H__
-#define __XLOOPS_ONELOOP_4PT_H__
+#ifndef __XLOOPS_ONELOOP_4PT_LEV6_H__
+#define __XLOOPS_ONELOOP_4PT_LEV6_H__
 
 #include <ginac/ginac.h>
 
 using namespace std;
-using namespace GiNaC;
 
 namespace xloops{
-	//	III.8	Level 8 Function
-	ex fn_1Loop4Pt();
-	ex fn_1Loop4Pt(const ex& q_, const ex& m_, const ex& Rho, const ex& Rho1, const ex& Rho2);
+	//	III.6	Level 6 Variable Functions
+	ex fn_A0 (int m, int l, int k);
+	ex fn_B0 (int m, int l, int k);
+	ex fn_C0 (int m, int l, int k);
+	ex fn_z1phi (int m, int l, int k);
+	ex fn_z2phi (int m, int l, int k);
+	ex fn_z3phi (int m, int l, int k);
+	ex fn_z4phi (int m, int l, int k);
+	ex fn_z1beta (int m, int l, int k);
+	ex fn_z2beta (int m, int l, int k);
+	ex fn_z3beta (int m, int l, int k);
+	ex fn_z4beta (int m, int l, int k);
+
+	ex fn_T1 (int n, int m, int l, int k);
+	ex fn_T2 (int n, int m, int l, int k);
+	ex fn_T3 (int n, int m, int l, int k);
+	ex fn_T4 (int n, int m, int l, int k);
 }	// Namespace xloops
 
-#endif 	// __XLOOPS_ONELOOP_4PT_H__
+#endif 	// __XLOOPS_ONELOOP_4PT_LEV6_H__

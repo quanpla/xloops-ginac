@@ -1,4 +1,4 @@
-/*******************************************************************************
+	/*******************************************************************************
 **
 **	xloop-ginacs Project
 **	1Loop4Pt implementation
@@ -13,7 +13,7 @@
 **			Quan, Phan 	(anhquan.phanle@gmail.com)
 ********************************************************************************
 **
-**	OneLoop4Pt main entry functions
+**	level 1 functions
 **
 ********************************************************************************
 **
@@ -25,18 +25,22 @@
 *******************************************************************************/
 
 
-#ifndef __XLOOPS_ONELOOP_4PT_H__
-#define __XLOOPS_ONELOOP_4PT_H__
+#ifndef __XLOOPS_ONELOOP_4PT_LEV1_H__
+#define __XLOOPS_ONELOOP_4PT_LEV1_H__
 
 #include <ginac/ginac.h>
 
 using namespace std;
-using namespace GiNaC;
 
 namespace xloops{
-	//	III.8	Level 8 Function
-	ex fn_1Loop4Pt();
-	ex fn_1Loop4Pt(const ex& q_, const ex& m_, const ex& Rho, const ex& Rho1, const ex& Rho2);
+/*******************************************************************************
+	**	IV.	Private Function Declarations
+*******************************************************************************/
+	//	III.1	Level 1 Variable Functions
+	ex fn_a (int l, int k);
+	ex fn_b (int l, int k);
+	ex fn_c (int l, int k);
+	ex fn_d (int l, int k); ex fn_d_re(int l, int k); ex fn_d_im(int l, int k); ex fn_d_conj(int l, int k);
 }	// Namespace xloops
 
-#endif 	// __XLOOPS_ONELOOP_4PT_H__
+#endif 	// __XLOOPS_ONELOOP_4PT_LEV1_H__

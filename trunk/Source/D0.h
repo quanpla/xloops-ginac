@@ -25,18 +25,17 @@
 *******************************************************************************/
 
 
-#ifndef __XLOOPS_ONELOOP_4PT_H__
-#define __XLOOPS_ONELOOP_4PT_H__
+#ifndef __XLOOPS_ONELOOP_4PT_D0_H__
+#define __XLOOPS_ONELOOP_4PT_D0_H__
 
 #include <ginac/ginac.h>
 
-using namespace std;
 using namespace GiNaC;
 
 namespace xloops{
 	//	III.8	Level 8 Function
-	ex fn_1Loop4Pt();
-	ex fn_1Loop4Pt(const ex& q_, const ex& m_, const ex& Rho, const ex& Rho1, const ex& Rho2);
+	void trm_init();
+	ex fn_D0();
 }	// Namespace xloops
 
-#endif 	// __XLOOPS_ONELOOP_4PT_H__
+#endif 	// __XLOOPS_ONELOOP_4PT_D0_H__
