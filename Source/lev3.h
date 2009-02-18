@@ -13,7 +13,7 @@
 **			Quan, Phan 	(anhquan.phanle@gmail.com)
 ********************************************************************************
 **
-**	OneLoop4Pt main entry functions
+**	level 3 functions
 **
 ********************************************************************************
 **
@@ -25,18 +25,25 @@
 *******************************************************************************/
 
 
-#ifndef __XLOOPS_ONELOOP_4PT_H__
-#define __XLOOPS_ONELOOP_4PT_H__
+#ifndef __XLOOPS_ONELOOP_4PT_LEV3_H__
+#define __XLOOPS_ONELOOP_4PT_LEV3_H__
 
 #include <ginac/ginac.h>
 
 using namespace std;
-using namespace GiNaC;
 
 namespace xloops{
-	//	III.8	Level 8 Function
-	ex fn_1Loop4Pt();
-	ex fn_1Loop4Pt(const ex& q_, const ex& m_, const ex& Rho, const ex& Rho1, const ex& Rho2);
+
+	//	III.3	Level 3 Variable Functions
+	ex fn_A (int m, int l, int k);
+	ex fn_B (int m, int l, int k);
+	ex fn_C (int m, int l, int k); ex fn_C_im (int m, int l, int k); ex fn_C_re (int m, int l, int k); ex fn_C_conj (int m, int l, int k);
+	ex fn_D (int m, int l, int k);
+	ex fn_f (int l, int k);
+	ex fn_fminus (int l, int k);
+	DECLARE_FUNCTION_1P(myfn_f);//because there is if condition
+	DECLARE_FUNCTION_1P(myfn_fminus);//because there is if condition
+
 }	// Namespace xloops
 
-#endif 	// __XLOOPS_ONELOOP_4PT_H__
+#endif 	// __XLOOPS_ONELOOP_4PT_LEV3_H__
