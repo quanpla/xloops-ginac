@@ -1,0 +1,45 @@
+;
+	if (flag == 0){
+		double num_real = (some_t).real();
+		f[0] = num_real;
+	} else{
+		double num_im = (some_t).imag();
+		f[0] = num_im;
+	}
+}
+int main(int argc, char **argv)
+{
+	int i;
+	// int rank,size;
+	double Pi = 3.1415926535897932385;
+	double estim[FUNCTIONS];   /* estimators for integrals                     */
+	double std_dev[FUNCTIONS]; /* standard deviations                          */
+	double chi2a[FUNCTIONS];   /* chi^2/n                                      */
+	double reg[2*DIMENSION];   /* integration domain                           */
+
+	double R1, R2;
+	R1 = atof(argv[1]);
+	R2 = atof(argv[2]);
+	//        MPI_Init(&argc, &argv);
+//		MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+//		MPI_Comm_size(MPI_COMM_WORLD, &size);
+		
+	for (i=0; i<DIMENSION; i++) {
+		reg[i] = R1;
+		reg[i+DIMENSION] = R2;
+	}
+	/* set up the grid (init = 0) with 5 iterations of 1000 samples,
+	 * no need to compute additional accumulators (fcns = 1),
+	 * no parallelization yet (wrks = 1). */
+
+				
+	flag = 0; // compute the real part
+	vegas(reg, DIMENSION, val, 0, 10000,10, NPRN_INPUT | NPRN_RESULT, 1, 0, 1, estim, std_dev, chi2a);
+	vegas(reg, DIMENSION, val, 1, 100000,10,NPRN_INPUT | NPRN_RESULT, FUNCTIONS, 0, 2, estim, std_dev, chi2a);
+	double value = estim[0];
+    	double error = std_dev[0];
+
+   	std::cout <<  value << " " << error << std::endl;
+	return 0;
+}
+

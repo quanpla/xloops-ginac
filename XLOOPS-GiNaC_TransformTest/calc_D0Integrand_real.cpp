@@ -7,6 +7,7 @@
 // for the function convert p to q
 #include "my_fns.h"
 
+using namespace std;
 using namespace GiNaC;
 using namespace xloops;
 

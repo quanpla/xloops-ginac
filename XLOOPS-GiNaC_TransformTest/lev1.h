@@ -13,14 +13,14 @@
 **			Quan, Phan 	(anhquan.phanle@gmail.com)
 ********************************************************************************
 **
-**	level 1 functions
+**	Level 1 = 4 dimensions integral
 **
 ********************************************************************************
 **
 ** Historial Log:
 **	Date		Version	Author		Description
 **	_________	_______	_________	________________________________
-**	20090214	1.0	Quan Phan	Create this file
+**	20090221	1.0	Quan Phan	Create this file
 **
 *******************************************************************************/
 
@@ -33,16 +33,13 @@
 using namespace std;
 
 namespace xloops{
-/*******************************************************************************
-	**	IV.	Private Function Declarations
-*******************************************************************************/
-	//	III.1	Level 1 Variable Functions
+	
 	ex fn_a (int l, int k);
 	ex fn_b (int l, int k);
 	ex fn_c (int l, int k);
 	ex fn_d (int l, int k); ex fn_d_re(int l, int k); ex fn_d_im(int l, int k); ex fn_d_conj(int l, int k);
-
-	void init_lev1();
+	
+	void xloopsGiNaC_calc_lev1();
 }	// Namespace xloops
 
 #endif 	// __XLOOPS_ONELOOP_4PT_LEV1_H__
