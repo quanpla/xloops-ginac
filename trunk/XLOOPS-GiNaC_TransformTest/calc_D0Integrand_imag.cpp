@@ -1,4 +1,4 @@
-le#include <iostream>
+#include <iostream>
 
 #include "ginac/ginac.h"
 
@@ -7,6 +7,7 @@ le#include <iostream>
 // for the function convert p to q
 #include "my_fns.h"
 
+using namespace std;
 using namespace GiNaC;
 using namespace xloops;
 
