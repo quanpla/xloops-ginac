@@ -43,8 +43,8 @@ end=1000
 
 # join the head mid tail to create the code for vegas
 # see the result in vegasresult folder
-R1 = -1000
-R2 = 1000
+R1=-1000
+R2=1000
 ./sub_run_vegas.sh 1 $R1 $R2
 ./sub_run_vegas.sh 9 $R1 $R2
 ./sub_run_vegas.sh 12 $R1 $R2
