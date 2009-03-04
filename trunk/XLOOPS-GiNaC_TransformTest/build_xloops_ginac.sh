@@ -1,24 +1,15 @@
 # Build underly XLOOPS-GiNaC programs
-echo "building my_fns.o"
-g++ `pkg-config --cflags --libs ginac` -c my_fns.cpp
 
-echo "building trmchk.o"
-g++ `pkg-config --cflags --libs ginac` -c trmchk.cpp
-
-echo "building trm2F.o"
-g++ `pkg-config --cflags --libs ginac` -c trm2F.cpp
-
-echo "building lev1.o"
-g++ `pkg-config --cflags --libs ginac` -c lev1.cpp
-
-echo "building lev2.o"
-g++ `pkg-config --cflags --libs ginac` -c lev2.cpp
-
-echo "building lev3.o"
-g++ `pkg-config --cflags --libs ginac` -c lev3.cpp
-
-echo "building D0Integrand.o"
-g++ `pkg-config --cflags --libs ginac` -c D0Integrand.cpp
+for fileName in "my_fns" "trmchk" "trm2F" "lev1" "lev2" "lev3" "D0Integrand"
+do
+	if ! [ -f "$fileName.o" ];
+	then
+		echo "Building the object file $fileName.o"
+		g++ `pkg-config --cflags --libs ginac` -c "$fileName".cpp
+	else
+		echo "$fileName.o existed! No thing happened."
+	fi
+done
 
 # Build the executable and move to exec folder
 echo "building exec/calc_D0Integrand_real.exe"

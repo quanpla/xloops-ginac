@@ -45,7 +45,7 @@ namespace xloops{
 		ex integrand1;
 		
 		P1 = pow(l0 + mat_q[0][0], 2) - pow(l1, 2) - pow(l2, 2) - pow(lortho, 2) - mat_msquare[0] + I*Rho;
-		P2 = pow(l0 + mat_q[1][0], 2) - pow(l1 + mat_q[1][0], 2) - pow(l2, 2) - pow(lortho, 2) - mat_msquare[1] + I*Rho;
+		P2 = pow(l0 + mat_q[1][0], 2) - pow(l1 + mat_q[1][1], 2) - pow(l2, 2) - pow(lortho, 2) - mat_msquare[1] + I*Rho;
 		P3 = pow(l0 + mat_q[2][0], 2) - pow(l1 + mat_q[2][1], 2) - pow(l2 + mat_q[2][2], 2) - pow(lortho, 2) - mat_msquare[2] + I*Rho;
 		P4 = pow(l0, 2) - pow(l1, 2) - pow(l2, 2) - pow(lortho, 2) - mat_msquare[3] + I*Rho;
 		
@@ -135,7 +135,9 @@ namespace xloops{
 			}
 		}
 		
-		integrand1801 *= 2.0*Pi*I;
+		// because we get the integral for t limit = -infty..infty
+		//	we will drop the *2 factor
+		integrand1801 *= Pi*I;
 		return integrand1801;
 	}
 	
@@ -170,8 +172,9 @@ namespace xloops{
 				integrand1802 += term1 * term2;
 			}
 		}
-			
-		integrand1802 *= -2.0*Pi*I;
+		
+		// the integrate is for limit of t = -infty..infty => no *2 factor
+		integrand1802 *= - Pi*I;
 		return integrand1802;
 	}
 	
