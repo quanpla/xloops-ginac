@@ -34,8 +34,8 @@ int main(int argc, char **argv)
 
 				
 	flag = 0; // compute the real part
-	vegas(reg, DIMENSION, val, 0, 10000,10, NPRN_INPUT | NPRN_RESULT, 1, 0, 1, estim, std_dev, chi2a);
-	vegas(reg, DIMENSION, val, 1, 100000,10,NPRN_INPUT | NPRN_RESULT, FUNCTIONS, 0, 2, estim, std_dev, chi2a);
+	vegas(reg, DIMENSION, val, 0,10000 , 10, NPRN_INPUT | NPRN_RESULT, 1, 0, 1, estim, std_dev, chi2a);
+	vegas(reg, DIMENSION, val, 1,100000, 10, NPRN_INPUT | NPRN_RESULT, FUNCTIONS, 0, 2, estim, std_dev, chi2a);
 	double value = estim[0];
     	double error = std_dev[0];
 
