@@ -8,7 +8,7 @@ extern "C" {
 #include <stdexcept>
 #include <fstream>
 #define DIMENSION 4
-#define FUNCTIONS 4
+#define FUNCTIONS 1
 
 /* Define parameter here */
 static int flag;

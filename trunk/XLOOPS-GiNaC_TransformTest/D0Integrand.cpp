@@ -180,7 +180,7 @@ namespace xloops{
 		ex return_value;
 		
 		// init variables
-		mat_msquare[0]=m_.op(0);	mat_msquare[1]=m_.op(1);	mat_msquare[2]=m_.op(2);	mat_msquare[3]=m_.op(3);
+		mat_msquare[0]=m_.op(0); mat_msquare[1]=m_.op(1); mat_msquare[2]=m_.op(2); mat_msquare[3]=m_.op(3);
 		mat_q[0][0]=q_.op(0);mat_q[0][1]=0;mat_q[0][2]=0;mat_q[0][3]=0;
 		mat_q[1][0]=q_.op(1);mat_q[1][1]=q_.op(2);mat_q[1][2]=0;mat_q[1][3]=0;
 		mat_q[2][0]=q_.op(3);mat_q[2][1]=q_.op(4);mat_q[2][2]=q_.op(5);mat_q[2][3]=0;
@@ -192,8 +192,8 @@ namespace xloops{
 			case 1: return_value = D0_integrand1(); break;
 			case 9: return_value = D0_integrand9(); break;
 			case 12: return_value = D0_integrand12(); break;
-			case 1801/*D+*/: return_value = D0_integrand1801(); break;
-			case 1802/*D-*/: return_value = D0_integrand1802(); break;			
+			case 1801/*D0+*/: return_value = D0_integrand1801(); break;
+			case 1802/*D0-*/: return_value = D0_integrand1802(); break;			
 			default: return_value = 0;
 		}
 		

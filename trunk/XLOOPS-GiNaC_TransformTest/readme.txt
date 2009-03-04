@@ -1,14 +1,16 @@
-1./ build all the neccessary files by executing build_xloops_ginac.sh
-2./ review and run the script build_vegas_code.sh to execute the whole thing
 
-3./ THE INTEGRAND code is in the files: D0Integrand.cpp and D0Integrand.h.
-4./ You can review all the code. But for quick, you can review:
-	D0Integrand.*,
-	dataplot_4dhead,
-	dataplot_4dtail,
-	build_xloops_ginac.sh,
-	build_vegas_code.sh
+Step #		Command				Description
+1		./build_xloops_ginac.sh		run this to rebuild the XLOOPS-GiNaC code
 
+2		./build_run_code.sh		run this to build all generated code (result in exec folder)
+
+3		./run_plotdata.sh		Generate data to plot
+						Result in folder plotdata/
+						It has parameter: first step last. If parameter not provided, it will use 							default	values 
+
+4		./run_vegas.sh			Executing vegas Integral calculation
+						Result in folder vegasresult
+						It has parameter: R1 R2 (the integral limit). If parameter not provided, it 							will use default values 
 
 
 for a quick reference:
