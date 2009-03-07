@@ -29,6 +29,9 @@
 #include "trmchk.h"
 #include "lev3.h"
 
+#define _NoIRho_BetaPhi
+//#define _AGK_debugmode
+
 using namespace GiNaC;
 namespace xloops{
 
@@ -47,8 +50,11 @@ namespace xloops{
 		check0denom(mat_B[m][l][k], "beta", m, l, k);
 
 		ex term1 = mat_A[m][l][k] / mat_B[m][l][k] - mat_alpha[l][k];
-
+#ifdef _NoIRho_BetaPhi
+		beta_mlk = term1 + sqrt(term1*term1 - mat_D[m][l][k]);
+#else
 		beta_mlk = term1 + sqrt(term1*term1 - mat_D[m][l][k] + I * Rho1 /*This is NOT Feynman's prescription.*/);
+#endif
 		beta_mlk = beta_mlk / mat_D[m][l][k];
 
 		return beta_mlk;
@@ -66,9 +72,11 @@ namespace xloops{
 		check0denom(denom, "phi", m, l, k);
 
 		ex term1 = mat_A[m][l][k] / mat_B[m][l][k] - mat_alpha[l][k];
-
+#ifdef _NoIRho_BetaPhi
 		phi_mlk = term1 + sqrt(term1*term1 - mat_D[m][l][k] + I * Rho1 /*This is NOT Feynman's prescription*/);
-
+#else
+		phi_mlk = term1 + sqrt(term1*term1 - mat_D[m][l][k]);
+#endif
 		return phi_mlk;
 	}
 
@@ -253,7 +261,13 @@ namespace xloops{
 				printf("%d-%d-%d\n", k+1, l+1, m+1);
 #endif
 				mat_beta[m][l][k] = fn_beta(m, l, k);
+#ifdef _AGK_debugmode
+				cout << "beta = " << mat_beta[m][l][k] << "\n";
+#endif
 				mat_phi[m][l][k] = fn_phi(m, l, k);
+#ifdef _AGK_debugmode
+				cout << "phi = " << mat_phi[m][l][k] << "\n";
+#endif
 				mat_g[m][l][k] = fn_g(m, l, k);
 				mat_gminus[m][l][k] = fn_gminus(m, l, k);
 			}

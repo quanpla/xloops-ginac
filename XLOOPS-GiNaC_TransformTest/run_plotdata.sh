@@ -12,7 +12,7 @@ fi
 outputFolder="plotdata/";
 
 # 	3.	The main loop (loop all dataplot)
-for equNo in 1 9 12 18
+for equNo in 1 9 12 18 30 39
 do
 	# generate real  part
 	outputFileName="eq""$equNo""_real""_$firstNum""_$step""_$lastNum"".dat";

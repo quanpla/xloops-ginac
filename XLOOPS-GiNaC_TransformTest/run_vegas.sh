@@ -12,7 +12,7 @@ fi
 outputFolder="vegasresult/"
 
 # 	3.	The main loop (loop all equation)
-for equNo in 1 9 12 18
+for equNo in 1 9 12 18 30 39
 do
 	# generate real  part
 	outputFileName="vegas_equ""$equNo""_real""_$R1""_$R2"".dat"

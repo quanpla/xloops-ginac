@@ -35,11 +35,11 @@ int main(int argc, char *argv[]){
 	// convert p --> q
 	q = p2q(p);
 	
-	Rho = 1e-20; Rho1 = 1e-21; Rho2 = 1e-23;
+	Rho = 1e-20; Rho1 = 0; Rho2 = 0;
 	
 	theIntegrand = D0_integrand(equationNumber, q, m, Rho, Rho1, Rho2);
 		
-	cout << csrc << real_part(theIntegrand);
+	cout << csrc << real_part(theIntegrand.evalf());
 	
 	return EXIT_SUCCESS;
 }
