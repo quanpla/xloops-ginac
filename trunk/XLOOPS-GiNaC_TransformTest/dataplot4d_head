@@ -4,6 +4,14 @@
 #include <math.h>
 
 using namespace std;
+double fabs(complex<double> x){
+	double return_data;
+	double r = x.real(), i = x.imag();
+
+	return_data = sqrt( pow(r,2) + pow(i,2) );
+
+	return return_data;
+}
 
 double fval(double x1, double x2, double x3, double x4){
 	double return_data = 0;

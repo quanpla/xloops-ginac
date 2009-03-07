@@ -22,6 +22,15 @@ std::complex<double> J(0,1);
         return i + J * j;
 }
 
+double fabs(std::complex<double> x){
+	double r = x.real(), i = x.imag();
+	double return_data;
+
+	return_data = sqrt(pow(r, 2) + pow(i, 2));
+
+	return return_data;
+}
+
 void val(double xx[DIMENSION], double f[FUNCTIONS])
 {
         double Pi = 3.1415926535897932385;
