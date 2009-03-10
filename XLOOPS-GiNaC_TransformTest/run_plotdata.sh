@@ -5,14 +5,15 @@ then
 	firstNum=$1; step=$2; lastNum=$3;
 else 
 	# edit this to change the default range of plotting data
-	firstNum=-100; step=1; lastNum=100;
+	firstNum=-10000; step=0.01; lastNum=10000;
 fi
 
 #	2.	Sset default output folder
 outputFolder="plotdata/";
 
 # 	3.	The main loop (loop all dataplot)
-for equNo in 1 9 12 18 30 39
+# 1 9 12 18 30
+for equNo in 40 48 
 do
 	# generate real  part
 	outputFileName="eq""$equNo""_real""_$firstNum""_$step""_$lastNum"".dat";

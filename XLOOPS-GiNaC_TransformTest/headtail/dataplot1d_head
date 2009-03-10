@@ -1,0 +1,21 @@
+#include <iostream>
+#include <complex>
+#include <cstdlib>
+#include <math.h>
+
+using namespace std;
+double fabs(complex<double> x){
+	double return_data;
+	double r = x.real(), i = x.imag();
+
+	return_data = sqrt( pow(r,2) + pow(i,2) );
+
+	return return_data;
+}
+
+double fval(double x1){
+	double return_data = 0;
+	double Pi = 3.1415926535897932385;
+	double z;
+	z = x1;
+	return_data = 
