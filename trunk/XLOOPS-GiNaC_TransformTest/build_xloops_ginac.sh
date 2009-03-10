@@ -7,7 +7,7 @@ do
 		echo "Building the object file $fileName.o"
 		g++ `pkg-config --cflags --libs ginac` -c "$fileName".cpp
 	else
-		echo "$fileName.o existed! No thing happened."
+			echo "$fileName.o existed! No thing happened."
 	fi
 done
 
@@ -19,6 +19,10 @@ echo "building exec/calc_D0Integrand_imag.exe"
 g++ `pkg-config --cflags --libs ginac` my_fns.o lev1.o lev2.o lev3.o lev4.o trm2F.o trmchk.o D0Integrand.o calc_D0Integrand_imag.cpp -o exec/calc_D0Integrand_imag.exe
 
 # build vegas before hand
-echo "building nvegas.o"
-gcc -c nvegas.c
-
+if ! [ -f "nvegas.o" ];
+then
+	echo "building nvegas.o"
+	gcc -c nvegas.c
+else
+	echo "nvegas.o existed! No thing happened."
+fi
