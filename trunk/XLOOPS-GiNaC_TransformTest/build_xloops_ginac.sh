@@ -1,6 +1,6 @@
 # Build underly XLOOPS-GiNaC programs
 
-for fileName in "my_fns" "trmchk" "trm2F" "lev1" "lev2" "lev3" "lev4" "D0Integrand" "NPoint_Test"
+for fileName in "my_fns" "trmchk" "trm2F" "lev1" "lev2" "lev3" "lev4" "D0Integrand" "NPoint_Test" "logdecmp"
 do
         if ! [ -f "$fileName.o" ];
         then
