@@ -12,18 +12,20 @@ do
 done
 
 # Build the executable and move to exec folder
-echo "building exec/calc_D0Integrand_real.exe"
-g++ `pkg-config --cflags --libs ginac` my_fns.o lev1.o lev2.o lev3.o lev4.o trm2F.o trmchk.o D0Integrand.o calc_D0Integrand_real.cpp -o exec/calc_D0Integrand_real.exe
+#echo "building exec/calc_D0Integrand_real.exe"
+#g++ `pkg-config --cflags --libs ginac` my_fns.o lev1.o lev2.o lev3.o lev4.o trm2F.o trmchk.o D0Integrand.o calc_D0Integrand_real.cpp -o exec/#calc_D0Integrand_real.exe
 
-echo "building exec/calc_D0Integrand_imag.exe"
-g++ `pkg-config --cflags --libs ginac` my_fns.o lev1.o lev2.o lev3.o lev4.o trm2F.o trmchk.o D0Integrand.o calc_D0Integrand_imag.cpp -o exec/calc_D0Integrand_imag.exe
+#echo "building exec/calc_D0Integrand_imag.exe"
+#g++ `pkg-config --cflags --libs ginac` my_fns.o lev1.o lev2.o lev3.o lev4.o trm2F.o trmchk.o D0Integrand.o calc_D0Integrand_imag.cpp -o exec/#calc_D0Integrand_imag.exe
 
-echo "building exec/calc_NPoint_real.exe"
-g++ `pkg-config --cflags --libs ginac` my_fns.o lev1.o lev2.o lev3.o lev4.o trm2F.o trmchk.o NPoint_Test.o calc_NPoint_real.cpp -o exec/calc_NPoint_real.exe
+#echo "building exec/calc_NPoint_real.exe"
+#g++ `pkg-config --cflags --libs ginac` my_fns.o lev1.o lev2.o lev3.o lev4.o trm2F.o trmchk.o NPoint_Test.o calc_NPoint_real.cpp -o exec/#calc_NPoint_real.exe
 
-echo "building exec/calc_NPoint_imag.exe"
-g++ `pkg-config --cflags --libs ginac` my_fns.o lev1.o lev2.o lev3.o lev4.o trm2F.o trmchk.o NPoint_Test.o calc_NPoint_imag.cpp -o exec/calc_NPoint_imag.exe
+#echo "building exec/calc_NPoint_imag.exe"
+#g++ `pkg-config --cflags --libs ginac` my_fns.o lev1.o lev2.o lev3.o lev4.o trm2F.o trmchk.o NPoint_Test.o calc_NPoint_imag.cpp -o exec/#calc_NPoint_imag.exe
 
+echo "building exec/calc_LogDecmp.exe"
+g++ `pkg-config --cflags --libs ginac` my_fns.o lev1.o lev2.o lev3.o lev4.o trm2F.o trmchk.o logdecmp.o calc_LogDecmp.cpp -o exec/calc_LogDecmp.exe
 
 # build vegas before hand
 if ! [ -f "nvegas.o" ];

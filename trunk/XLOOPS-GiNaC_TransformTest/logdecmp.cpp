@@ -27,6 +27,7 @@
 #include "trm2F.h"
 #include "logdecmp.h"
 
+using namespace std;
 using namespace GiNaC;
 
 namespace xloops{
@@ -50,8 +51,8 @@ ex fn_z1sigma(int k, int l, int m, int n, const ex &sigma){
 	ex return_z1sigma;
 
 	ex a, b, c, delta;
-	a = 1;
-	b = (mat_E[m][l][k] + mat_Q[m][l][k]*sigma) / (mat_P[m][l][k]*sigma);
+	a = mat_P[m][l][k]*sigma;
+	b = mat_E[m][l][k] + mat_Q[m][l][k]*sigma;
 	c = -mat_msquare[k] + I*Rho;
 
 	delta = b*b - 4.0*a*c;
@@ -65,8 +66,8 @@ ex fn_z2sigma(int k, int l, int m, int n, const ex &sigma){
 	ex return_z2sigma;
 
 	ex a, b, c, delta;
-	a = 1;
-	b = (mat_E[m][l][k] + mat_Q[m][l][k]*sigma) / (mat_P[m][l][k]*sigma);
+	a = mat_P[m][l][k]*sigma;
+	b = mat_E[m][l][k] + mat_Q[m][l][k]*sigma;
 	c = -mat_msquare[k] + I*Rho;
 
 	delta = b*b - 4.0*a*c;
@@ -101,7 +102,7 @@ ex log_NPoint_82_minus(int k, int l, int m, int n, const ex &sigma, const ex &z)
 
 	return_log_NPoint_82_minus = log(S) + log(-1.0 / (mat_P[m][l][k]*z + mat_Q[m][l][k]) );
 
-	return_log_NPoint_82_minus += -2.0*I*Pi * 	                                         my_step(imag_part( - (mat_P[m][l][k]*z + mat_Q[m][l][k]) )) * my_step(-imag_part(S / ( -(mat_P[m][l][k]*z + mat_Q[m][l][k]) )));
+	return_log_NPoint_82_minus += -2.0*I*Pi * my_step(imag_part( - (mat_P[m][l][k]*z + mat_Q[m][l][k]) )) * my_step(-imag_part(S / ( -(mat_P[m][l][k]*z + mat_Q[m][l][k]) )));
 
 	return return_log_NPoint_82_minus;
 }
@@ -112,19 +113,20 @@ ex log_Khiem_46_plus(int k, int l, int m, int n, const ex &sigma, const ex &z){
 	ex log_plus = 0;
 
 	ex 	z1sigma = fn_z1sigma(k, l, m, n, sigma),
-		z2sigma = fn_z2sigma(k, l, m, n, sigma);
+		z2sigma = fn_z2sigma(k, l, m, n, sigma),
+		S = fn_S(k, l, m, n, sigma, z);
 
-	log_plus = log(mat_P[k][l][m]*sigma*z - mat_P[k][l][m]*sigma*z1sigma)
+	log_plus = log(mat_P[m][l][k]*sigma*z - mat_P[m][l][k]*sigma*z1sigma)
 		+ log(z-z2sigma)
-		- log(mat_P[k][l][m]*z + mat_Q[k][l][m]);
+		- log(mat_P[m][l][k]*z + mat_Q[m][l][k]);
 
 	log_plus += 2.0*Pi*I*(
-	                       my_step(imag_part(mat_P[k][l][m]*sigma*z1sigma))
+	                       my_step(imag_part(mat_P[m][l][k]*sigma*z1sigma))
 	                       * my_step(imag_part(z2sigma))
 	                     )
 		- 2.0*Pi*I*(
-		             my_step(-imag_part(mat_Q[k][l][m]))
-		             * my_step(imag_part(fn_S(k, l, m, n, sigma, z) / (mat_P[k][l][m]*z + mat_Q[k][l][m])))
+		             my_step(-imag_part(mat_Q[m][l][k]))
+		             * my_step( - imag_part( S / (mat_P[m][l][k]*z + mat_Q[m][l][k]) ) )
 		           );
 
 	return log_plus;
@@ -135,25 +137,50 @@ ex log_Khiem_46_minus(int k, int l, int m, int n, const ex &sigma, const ex &z){
 	ex log_minus = 0;
 
 	ex 	z1sigma = fn_z1sigma(k, l, m, n, sigma),
-		z2sigma = fn_z2sigma(k, l, m, n, sigma);
+		z2sigma = fn_z2sigma(k, l, m, n, sigma),
+		S = fn_S(k, l, m, n, sigma, z);
 
-	log_minus = log(-mat_P[k][l][m]*sigma*z + mat_P[k][l][m]*sigma*z1sigma)
+	log_minus = log(-mat_P[m][l][k]*sigma*z + mat_P[m][l][k]*sigma*z1sigma)
 		+ log(z-z2sigma)
-		- log(mat_P[k][l][m]*z + mat_Q[k][l][m]);
+		- log(mat_P[m][l][k]*z + mat_Q[m][l][k]);
 
 	log_minus += -2.0*Pi*I*(
-	                         my_step(imag_part(mat_P[k][l][m]*sigma*z1sigma))
+	                         my_step(imag_part(mat_P[m][l][k]*sigma*z1sigma))
 	                         * my_step(-imag_part(z2sigma))
 	                       )
 		+ 2.0*Pi*I*(
-		             my_step(imag_part(mat_Q[k][l][m]))
+		             my_step(imag_part(mat_Q[m][l][k]))
 		             * my_step(-imag_part(
-		                                   fn_S(k, l, m, n, sigma, z)
-		                                   /(mat_P[k][l][m]*z + mat_Q[k][l][m])
+		                                   S / (mat_P[m][l][k]*z + mat_Q[m][l][k])
 		                                 )
 		                      )
 		           );
 	return log_minus;
 }
 
+ex log_original_plus(int k, int l, int m, int n, const ex &sigma, const ex &z){
+	ex return_log_original_plus = 0;
+	ex 	nom = fn_S(k, l, m, n, sigma, z),
+		denom = mat_P[m][l][k]*z + mat_Q[m][l][k];
+	if (denom.is_zero()){
+		printf("\n\n Error in log_original, denominator is zero. (k=%d, l=%d, m=%d, n=%d)", k+1, l+1, m+1, n+1);
+		cout << "\t\t z = " << z << endl << endl;
+	}
+	return_log_original_plus = log(nom / denom);
+
+	return return_log_original_plus;
+}
+
+ex log_original_minus(int k, int l, int m, int n, const ex &sigma, const ex &z){
+	ex return_log_original_minus = 0;
+	ex 	nom = fn_S(k, l, m, n, sigma, z),
+		denom = -( mat_P[m][l][k]*z + mat_Q[m][l][k] );
+	if (denom.is_zero()){
+		printf("\n\n Error in log_original, denominator is zero. (k=%d, l=%d, m=%d, n=%d)", k+1, l+1, m+1, n+1);
+		cout << "\t\t z = " << z << endl << endl;
+	}
+	return_log_original_minus = log(nom / denom);
+
+	return return_log_original_minus;
+}
 } // namespace xloops

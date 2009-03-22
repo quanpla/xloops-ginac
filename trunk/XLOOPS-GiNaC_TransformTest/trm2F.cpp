@@ -47,28 +47,32 @@ void exportTerms2File(string filePathName){
 
 		f << "----------------------------------------------"<< endl << "1. Level 1 Variables:" << endl;
 		for(k = 0; k < 4; k++){ for (l = 0; l < 4; l++){
-			f << "      a_" << k+1 << l+1 << "=" << mat_a[k][l];
+			f << "      a_" << k+1 << l+1 << "=";
+			if(l!=k) f << mat_a[k][l];
 		}
 		f << endl;
 		}
 		f << endl;
 
 		for(k = 0; k < 4; k++){ for (l = 0; l < 4; l++){
-			f << "      b_" << k+1 << l+1 << "=" << mat_b[k][l];
+			f << "      b_" << k+1 << l+1 << "=";
+			if(l!=k) f << mat_b[k][l];
 		}
 		f << endl;
 		}
 		f << endl;
 
 		for(k = 0; k < 4; k++){ for (l = 0; l < 4; l++){
-			f << "      c_" << k+1 << l+1 << "=" << mat_c[k][l];
+			f << "      c_" << k+1 << l+1 << "=";
+			if(l!=k) f << mat_c[k][l];
 		}
 		f << endl;
 		}
 		f << endl;
 
 		for(k = 0; k < 4; k++){ for (l = 0; l < 4; l++){
-			f << "      d_" << k+1 << l+1 << "=" << mat_d[k][l];
+			f << "      d_" << k+1 << l+1 << "=";
+			if(l!=k) f << mat_d[k][l];
 		}
 		f << endl;
 		}
@@ -76,21 +80,24 @@ void exportTerms2File(string filePathName){
 
 		f << "----------------------------------------------"<< endl << "2. Level 2 Variables:" << endl;
 		for(k = 0; k < 4; k++){ for (l = 0; l < 4; l++){
-			f << "      AC_" << k+1 << l+1 << "=" << mat_AC[k][l];
+			f << "      AC_" << k+1 << l+1 << "=";
+			if(l!=k) f << mat_AC[k][l];
 		}
 		f << endl;
 		}
 		f << endl;
 
 		for(k = 0; k < 4; k++){ for (l = 0; l < 4; l++){
-			f << "      alpha_" << k+1 << l+1 << "=" << mat_alpha[k][l];
+			f << "      alpha_" << k+1 << l+1 << "=";
+			if(l!=k) f << mat_alpha[k][l];
 		}
 		f << endl;
 		}
 		f << endl;
 
 		for(k = 0; k < 4; k++){ for (l = 0; l < 4; l++){ for (m = 0; m < 4; m++){
-			f << "      A_" << k+1 << l+1 << m+1 << "=" << mat_A[k][l][m];
+			f << "      A_" << k+1 << l+1 << m+1 << "=";
+			if(l!=k && m!=k && l!=m) f << mat_A[k][l][m];
 		}
 		f << endl;
 		}
@@ -99,7 +106,8 @@ void exportTerms2File(string filePathName){
 		f << endl;
 
 		for(k = 0; k < 4; k++){ for (l = 0; l < 4; l++){ for (m = 0; m < 4; m++){
-			f << "      B_" << k+1 << l+1 << m+1 << "=" << mat_B[k][l][m];
+			f << "      B_" << k+1 << l+1 << m+1 << "=";
+			if(l!=k && m!=k && l!=m) f << mat_B[k][l][m];
 		}
 		f << endl;
 		}
@@ -108,7 +116,8 @@ void exportTerms2File(string filePathName){
 		f << endl;
 
 		for(k = 0; k < 4; k++){ for (l = 0; l < 4; l++){ for (m = 0; m < 4; m++){
-			f << "      C_" << k+1 << l+1 << m+1 << "=" << mat_C[k][l][m];
+			f << "      C_" << k+1 << l+1 << m+1 << "=";
+			if(l!=k && m!=k && l!=m) f << mat_C[k][l][m];
 		}
 		f << endl;
 		}
@@ -117,7 +126,8 @@ void exportTerms2File(string filePathName){
 		f << endl;
 
 		for(k = 0; k < 4; k++){ for (l = 0; l < 4; l++){ for (m = 0; m < 4; m++){
-			f << "      D_" << k+1 << l+1 << m+1 << "=" << mat_D[k][l][m];
+			f << "      D_" << k+1 << l+1 << m+1 << "=";
+			if(l!=k && m!=k && l!=m) f << mat_D[k][l][m];
 		}
 		f << endl;
 		}
@@ -126,14 +136,16 @@ void exportTerms2File(string filePathName){
 		f << endl;
 
 		for(k = 0; k < 4; k++){ for (l = 0; l < 4; l++){
-			f << "      f_" << k+1 << l+1 << "=" << mat_f[k][l];
+			f << "      f_" << k+1 << l+1 << "=";
+			if(l!=k) f << mat_f[k][l];
 		}
 		f << endl;
 		}
 		f << endl;
 
 		for(k = 0; k < 4; k++){ for (l = 0; l < 4; l++){
-			f << "      fminus_" << k+1 << l+1 << "=" << mat_fminus[k][l];
+			f << "      fminus_" << k+1 << l+1 << "=";
+			if(l!=k) f << mat_fminus[k][l];
 		}
 		f << endl;
 		}
@@ -143,7 +155,8 @@ void exportTerms2File(string filePathName){
 		f << "----------------------------------------------"<< endl << "4. Level 3 Variables:" << endl;
 
 		for(k = 0; k < 4; k++){ for (l = 0; l < 4; l++){ for (m = 0; m < 4; m++){
-			f << "      beta_" << k+1 << l+1 << m+1 << "=" << my_evalf(mat_beta[k][l][m]);
+			f << "      beta_" << k+1 << l+1 << m+1 << "=";
+			if(l!=k && m!=k && l!=m) f << my_evalf(mat_beta[k][l][m]);
 		}
 		f << endl;
 		}
@@ -153,7 +166,8 @@ void exportTerms2File(string filePathName){
 
 
 		for(k = 0; k < 4; k++){ for (l = 0; l < 4; l++){ for (m = 0; m < 4; m++){
-			f << "      phi_" << k+1 << l+1 << m+1 << "=" << my_evalf(mat_phi[k][l][m]);
+			f << "      phi_" << k+1 << l+1 << m+1 << "=";
+			if(l!=k && m!=k && l!=m) f << my_evalf(mat_phi[k][l][m]);
 		}
 		f << endl;
 		}
@@ -163,7 +177,8 @@ void exportTerms2File(string filePathName){
 
 
 		for(k = 0; k < 4; k++){ for (l = 0; l < 4; l++){ for (m = 0; m < 4; m++){
-			f << "      g_" << k+1 << l+1 << m+1 << "=" << my_evalf(mat_g[k][l][m]);
+			f << "      g_" << k+1 << l+1 << m+1 << "=";
+			if(l!=k && m!=k && l!=m) f << my_evalf(mat_g[k][l][m]);
 		}
 		f << endl;
 		}
@@ -173,7 +188,8 @@ void exportTerms2File(string filePathName){
 
 
 		for(k = 0; k < 4; k++){ for (l = 0; l < 4; l++){ for (m = 0; m < 4; m++){
-			f << "      gminus_" << k+1 << l+1 << m+1 << "=" << my_evalf(mat_gminus[k][l][m]);
+			f << "      gminus_" << k+1 << l+1 << m+1 << "=";
+			if(l!=k && m!=k && l!=m) f << my_evalf(mat_gminus[k][l][m]);
 		}
 		f << endl;
 		}
@@ -183,7 +199,8 @@ void exportTerms2File(string filePathName){
 
 
 		for(k = 0; k < 4; k++){ for (l = 0; l < 4; l++){ for (m = 0; m < 4; m++){
-			f << "      Q_" << k+1 << l+1 << m+1 << "=" << my_evalf(mat_Q[k][l][m]);
+			f << "      Q_" << k+1 << l+1 << m+1 << "=";
+			if(l!=k && m!=k && l!=m) f << my_evalf(mat_Q[k][l][m]);
 		}
 		f << endl;
 		}
@@ -191,26 +208,8 @@ void exportTerms2File(string filePathName){
 		}
 		f << endl;
 		for(k = 0; k < 4; k++){ for (l = 0; l < 4; l++){ for (m = 0; m < 4; m++){
-			f << "      Q_im" << k+1 << l+1 << m+1 << "=" << my_evalf(mat_Q_im[k][l][m]);
-		}
-		f << endl;
-		}
-		f  << endl;
-		}
-		f << endl;
-
-		for(k = 0; k < 4; k++){ for (l = 0; l < 4; l++){ for (m = 0; m < 4; m++){
-			f << "      Q_re" << k+1 << l+1 << m+1 << "=" << my_evalf(mat_Q_re[k][l][m]);
-		}
-		f << endl;
-		}
-		f  << endl;
-		}
-		f << endl;
-
-
-		for(k = 0; k < 4; k++){ for (l = 0; l < 4; l++){ for (m = 0; m < 4; m++){
-			f << "      P_" << k+1 << l+1 << m+1 << "=" << my_evalf(mat_P[k][l][m]);
+			f << "      Q_im" << k+1 << l+1 << m+1 << "=";
+			if(l!=k && m!=k && l!=m) f << my_evalf(mat_Q_im[k][l][m]);
 		}
 		f << endl;
 		}
@@ -219,7 +218,29 @@ void exportTerms2File(string filePathName){
 		f << endl;
 
 		for(k = 0; k < 4; k++){ for (l = 0; l < 4; l++){ for (m = 0; m < 4; m++){
-			f << "      E_" << k+1 << l+1 << m+1 << "=" << my_evalf(mat_E[k][l][m]);
+			f << "      Q_re" << k+1 << l+1 << m+1 << "=";
+			if(l!=k && m!=k && l!=m) f << my_evalf(mat_Q_re[k][l][m]);
+		}
+		f << endl;
+		}
+		f  << endl;
+		}
+		f << endl;
+
+
+		for(k = 0; k < 4; k++){ for (l = 0; l < 4; l++){ for (m = 0; m < 4; m++){
+			f << "      P_" << k+1 << l+1 << m+1 << "=";
+			if(l!=k && m!=k && l!=m) f << my_evalf(mat_P[k][l][m]);
+		}
+		f << endl;
+		}
+		f  << endl;
+		}
+		f << endl;
+
+		for(k = 0; k < 4; k++){ for (l = 0; l < 4; l++){ for (m = 0; m < 4; m++){
+			f << "      E_" << k+1 << l+1 << m+1 << "=";
+			if(l!=k && m!=k && l!=m) f << my_evalf(mat_E[k][l][m]);
 		}
 		f << endl;
 		}
@@ -228,7 +249,8 @@ void exportTerms2File(string filePathName){
 		f << endl;
 
 		for(k = 0; k < 4; k++){ for (l = 0; l < 4; l++){ for (m = 0; m < 4; m++){ for (n = 0; n < 4; n++){
-			f << "      F_" << k+1 << l+1 << m+1 << n+1 << "=" << my_evalf(mat_F[k][l][m][n]);
+			f << "      F_" << k+1 << l+1 << m+1 << n+1 << "=";
+			if(l!=k && m!=k && n!=k && m!=l && n!=l && n!=m) f << my_evalf(mat_F[k][l][m][n]);
 		}
 		f << endl;
 		}
@@ -243,7 +265,8 @@ void exportTerms2File(string filePathName){
 
 		
 		for(k = 0; k < 4; k++){ for (l = 0; l < 4; l++){ for (m = 0; m < 4; m++){
-			f << "      z1phi_" << k+1 << l+1 << m+1 << "=" << my_evalf(mat_z1phi[k][l][m]);
+			f << "      z1phi_" << k+1 << l+1 << m+1 << "=";
+			if(l!=k && m!=k && l!=m) f << my_evalf(mat_z1phi[k][l][m]);
 		}
 		f << endl;
 		}
@@ -252,7 +275,8 @@ void exportTerms2File(string filePathName){
 		f << endl;
 
 		for(k = 0; k < 4; k++){ for (l = 0; l < 4; l++){ for (m = 0; m < 4; m++){
-			f << "      z2phi_" << k+1 << l+1 << m+1 << "=" << my_evalf(mat_z2phi[k][l][m]);
+			f << "      z2phi_" << k+1 << l+1 << m+1 << "=";
+			if(l!=k && m!=k && l!=m) f << my_evalf(mat_z2phi[k][l][m]);
 		}
 		f << endl;
 		}
@@ -261,7 +285,8 @@ void exportTerms2File(string filePathName){
 		f << endl;
 
 		for(k = 0; k < 4; k++){ for (l = 0; l < 4; l++){ for (m = 0; m < 4; m++){
-			f << "      z3phi_" << k+1 << l+1 << m+1 << "=" << my_evalf(mat_z3phi[k][l][m]);
+			f << "      z3phi_" << k+1 << l+1 << m+1 << "=";
+			if(l!=k && m!=k && l!=m) f << my_evalf(mat_z3phi[k][l][m]);
 		}
 		f << endl;
 		}
@@ -270,7 +295,8 @@ void exportTerms2File(string filePathName){
 		f << endl;
 
 		for(k = 0; k < 4; k++){ for (l = 0; l < 4; l++){ for (m = 0; m < 4; m++){
-			f << "      z4phi_" << k+1 << l+1 << m+1 << "=" << my_evalf(mat_z4phi[k][l][m]);
+			f << "      z4phi_" << k+1 << l+1 << m+1 << "=";
+			if(l!=k && m!=k && l!=m) f << my_evalf(mat_z4phi[k][l][m]);
 		}
 		f << endl;
 		}
@@ -279,7 +305,8 @@ void exportTerms2File(string filePathName){
 		f << endl;
 
 		for(k = 0; k < 4; k++){ for (l = 0; l < 4; l++){ for (m = 0; m < 4; m++){
-			f << "      z1beta_" << k+1 << l+1 << m+1 << "=" << my_evalf(mat_z1beta[k][l][m]);
+			f << "      z1beta_" << k+1 << l+1 << m+1 << "=";
+			if(l!=k && m!=k && l!=m) f << my_evalf(mat_z1beta[k][l][m]);
 		}
 		f << endl;
 		}
@@ -288,7 +315,8 @@ void exportTerms2File(string filePathName){
 		f << endl;
 
 		for(k = 0; k < 4; k++){ for (l = 0; l < 4; l++){ for (m = 0; m < 4; m++){
-			f << "      z2beta_" << k+1 << l+1 << m+1 << "=" << my_evalf(mat_z2beta[k][l][m]);
+			f << "      z2beta_" << k+1 << l+1 << m+1 << "=";
+			if(l!=k && m!=k && l!=m) f << my_evalf(mat_z2beta[k][l][m]);
 		}
 		f << endl;
 		}
@@ -297,7 +325,8 @@ void exportTerms2File(string filePathName){
 		f << endl;
 
 		for(k = 0; k < 4; k++){ for (l = 0; l < 4; l++){ for (m = 0; m < 4; m++){
-			f << "      z3beta_" << k+1 << l+1 << m+1 << "=" << my_evalf(mat_z3beta[k][l][m]);
+			f << "      z3beta_" << k+1 << l+1 << m+1 << "=";
+			if(l!=k && m!=k && l!=m) f << my_evalf(mat_z3beta[k][l][m]);
 		}
 		f << endl;
 		}
@@ -306,7 +335,8 @@ void exportTerms2File(string filePathName){
 		f << endl;
 
 		for(k = 0; k < 4; k++){ for (l = 0; l < 4; l++){ for (m = 0; m < 4; m++){
-			f << "      z4beta_" << k+1 << l+1 << m+1 << "=" << my_evalf(mat_z4beta[k][l][m]);
+			f << "      z4beta_" << k+1 << l+1 << m+1 << "=";
+			if(l!=k && m!=k && l!=m) f << my_evalf(mat_z4beta[k][l][m]);
 		}
 		f << endl;
 		}
@@ -315,18 +345,8 @@ void exportTerms2File(string filePathName){
 		f << endl;
 
 		for(k = 0; k < 4; k++){ for (l = 0; l < 4; l++){ for (m = 0; m < 4; m++){ for (n = 0; n < 4; n++){
-			f << "      T1_" << k+1 << l+1 << m+1 << n+1 << "=" << my_evalf(mat_T1[k][l][m][n]);
-		}
-		f << endl;
-		}
-		f  << endl;
-		}
-		f  << endl;
-		}
-		f << endl;
-
-		for(k = 0; k < 4; k++){ for (l = 0; l < 4; l++){ for (m = 0; m < 4; m++){ for (n = 0; n < 4; n++){
-			f << "      T2_" << k+1 << l+1 << m+1 << n+1 << "=" << my_evalf(mat_T2[k][l][m][n]);
+			f << "      T1_" << k+1 << l+1 << m+1 << n+1 << "=";
+			if(l!=k && m!=k && n!=k && m!=l && n!=l && n!=m) f << my_evalf(mat_T1[k][l][m][n]);
 		}
 		f << endl;
 		}
@@ -337,7 +357,8 @@ void exportTerms2File(string filePathName){
 		f << endl;
 
 		for(k = 0; k < 4; k++){ for (l = 0; l < 4; l++){ for (m = 0; m < 4; m++){ for (n = 0; n < 4; n++){
-			f << "      T3_" << k+1 << l+1 << m+1 << n+1 << "=" << my_evalf(mat_T3[k][l][m][n]);
+			f << "      T2_" << k+1 << l+1 << m+1 << n+1 << "=";
+			if(l!=k && m!=k && n!=k && m!=l && n!=l && n!=m) f << my_evalf(mat_T2[k][l][m][n]);
 		}
 		f << endl;
 		}
@@ -348,7 +369,20 @@ void exportTerms2File(string filePathName){
 		f << endl;
 
 		for(k = 0; k < 4; k++){ for (l = 0; l < 4; l++){ for (m = 0; m < 4; m++){ for (n = 0; n < 4; n++){
-			f << "      T4_" << k+1 << l+1 << m+1 << n+1 << "=" << my_evalf(mat_T4[k][l][m][n]);
+			f << "      T3_" << k+1 << l+1 << m+1 << n+1 << "=";
+			if(l!=k && m!=k && n!=k && m!=l && n!=l && n!=m) f << my_evalf(mat_T3[k][l][m][n]);
+		}
+		f << endl;
+		}
+		f  << endl;
+		}
+		f  << endl;
+		}
+		f << endl;
+
+		for(k = 0; k < 4; k++){ for (l = 0; l < 4; l++){ for (m = 0; m < 4; m++){ for (n = 0; n < 4; n++){
+			f << "      T4_" << k+1 << l+1 << m+1 << n+1 << "=";
+			if(l!=k && m!=k && n!=k && m!=l && n!=l && n!=m) f << my_evalf(mat_T4[k][l][m][n]);
 		}
 		f << endl;
 		}
@@ -360,7 +394,8 @@ void exportTerms2File(string filePathName){
 
 		f << "----------------------------------------------"<< endl << "7. Level 5 Variables:" << endl;
 		for(k = 0; k < 4; k++){ for (l = 0; l < 4; l++){ for (m = 0; m < 4; m++){ for (n = 0; n < 4; n++){
-			f << "      OPlus_" << k+1 << l+1 << m+1 << n+1 << "=" << my_evalf(mat_OPlus[k][l][m][n]);
+			f << "      OPlus_" << k+1 << l+1 << m+1 << n+1 << "=";
+			if(l!=k && m!=k && n!=k && m!=l && n!=l && n!=m) f << my_evalf(mat_OPlus[k][l][m][n]);
 		}
 		f << endl;
 		}
@@ -372,7 +407,8 @@ void exportTerms2File(string filePathName){
 
 
 		for(k = 0; k < 4; k++){ for (l = 0; l < 4; l++){ for (m = 0; m < 4; m++){ for (n = 0; n < 4; n++){
-			f << "      OMinus_" << k+1 << l+1 << m+1 << n+1 << "=" << my_evalf(mat_OMinus[k][l][m][n]);
+			f << "      OMinus_" << k+1 << l+1 << m+1 << n+1 << "=";
+			if(l!=k && m!=k && n!=k && m!=l && n!=l && n!=m) f << my_evalf(mat_OMinus[k][l][m][n]);
 		}
 		f << endl;
 		}
