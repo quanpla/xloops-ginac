@@ -33,22 +33,13 @@
 using namespace std;
 
 namespace xloops{
-	
-	ex fn_z1phi (int m, int l, int k);
-	ex fn_z2phi (int m, int l, int k);
-	ex fn_z3phi (int m, int l, int k);
-	ex fn_z4phi (int m, int l, int k);
-	ex fn_z1beta (int m, int l, int k);
-	ex fn_z2beta (int m, int l, int k);
-	ex fn_z3beta (int m, int l, int k);
-	ex fn_z4beta (int m, int l, int k);
 
-	ex fn_T1 (int n, int m, int l, int k);
-	ex fn_T2 (int n, int m, int l, int k);
-	ex fn_T3 (int n, int m, int l, int k);
-	ex fn_T4 (int n, int m, int l, int k);
-	
-	void xloopsGiNaC_calc_lev4(); // calculate all level 4 terms
+ex fn_delta89 (int m, int l, int k);
+ex fn_X189 (int m, int l, int k);
+ex fn_X289 (int m, int l, int k);
+ex fn_etaplus90 (int m, int l, int k, const ex &z);
+ex fn_etaminus90 (int m, int l, int k, const ex &z);
+
 } // Namespace xloops
 
 #endif // __XLOOPS_ONELOOP_4PT_LEV4_H__
