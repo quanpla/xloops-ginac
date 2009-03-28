@@ -1,4 +1,4 @@
-#labels Phase-Requirements
+#labels Featured
 # Requirements to build this project
 
 = Introduction =
