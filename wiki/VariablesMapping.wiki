@@ -9,8 +9,18 @@ In general, when the variable have indexes, its corresponding variable in the co
          
 
 = Tables of Variables and equivalent =
-|| *Analytics Variable* || *Code Variable* || *Calculate Function* || *Note* ||
-|| m,,k,, || `mat_m[k]` || || Internal mass ||
-|| q,,k,, || `mat_q[k]` || || Momenta in parallel and orthogonal space ||
-|| a,,lk,, to d,,lk,,|| `mat_a[l][k]` to `mat_d[l][k]` || `fn_a(int l, int k)` to `fn_d(int l, int k)` || Level 1 integrand terms ||
-|| <math>\alpha\,\!</math> || || || ||
+
+<wiki:comment>
+             This is the header of the table
+</wiki:comment>
+|| *Analytics Variable* || *Code Variable* || *Calculate Function* || *Note* || *Declaration File* ||
+<wiki:comment>
+             Input variables
+</wiki:comment>
+|| m^2^,,k,, || `mat_msquare[k]` || || Internal mass in square || terms.h ||
+|| q,,k,, || `mat_q[k]` || ditto || Momenta in parallel and orthogonal space || ditto ||
+<wiki:comment>
+             Level 1 (4 integrand) terms
+</wiki:comment>
+|| a,,lk,, to d,,lk,,|| `mat_a[l][k]` to `mat_d[l][k]` || `fn_a(int l, int k)` to `fn_d(int l, int k)` || Level 1 integrand terms || lev1.h ||
+|| alpha,,lk,, || || || || ditto ||
