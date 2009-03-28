@@ -1,0 +1,16 @@
+#summary Mapping between codes & analytic docs Variables:
+
+= Introduction =
+
+I need to use some cryptic name for code variables and functions for the sake of duplicate naming.
+In general, when the variable have indexes, its corresponding variable in the code will be a matrix of [http://www.ginac.de/reference/ex_8h-source.html ex] with the name of prefix *mat`_`*. Example would help:
+ F,,nmlk,,  <=>  `mat_F[n][m][l][k]`, and often have a function to calculate its value `ex fn_F(int n, int m, int n, int k)`
+
+         
+
+= Tables of Variables and equivalent =
+|| *Analytics Variable* || *Code Variable* || *Calculate Function* || *Note* ||
+|| m,,k,, || `mat_m[k]` || || Internal mass ||
+|| q,,k,, || `mat_q[k]` || || Momenta in parallel and orthogonal space ||
+|| a,,lk,, to d,,lk,,|| `mat_a[l][k]` to `mat_d[l][k]` || `fn_a(int l, int k)` to `fn_d(int l, int k)` || Level 1 integrand terms ||
+|| <math>\alpha\,\!</math> || || || ||
