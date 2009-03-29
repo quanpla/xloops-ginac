@@ -9,18 +9,8 @@ In general, when the variable have indexes, its corresponding variable in the co
          
 
 = Tables of Variables and equivalent =
-
-<wiki:comment>
-             This is the header of the table
-</wiki:comment>
-|| *Analytics Variable* || *Code Variable* || *Calculate Function* || *Note* || *Declaration File* ||
-<wiki:comment>
-             Input variables
-</wiki:comment>
-|| m^2^,,k,, || `mat_msquare[k]` || || Internal mass in square || terms.h ||
-|| q,,k,, || `mat_q[k]` || ditto || Momenta in parallel and orthogonal space || ditto ||
-<wiki:comment>
-             Level 1 (4 integrand) terms
-</wiki:comment>
-|| a,,lk,, to d,,lk,,|| `mat_a[l][k]` to `mat_d[l][k]` || `fn_a(int l, int k)` to `fn_d(int l, int k)` || Level 1 integrand terms || lev1.h ||
-|| alpha,,lk,, || || || || ditto ||
+|| *Analytics Variable/Function* || *Code Variable* || *Calculate Function* || *Note* || *Header/Implement File* ||
+|| m^2^,,k,,<br>q,,k,, || `mat_msquare[k]`<br>`mat_q[k]` || ||   Internal mass in square<br>   Momenta in parallel and orthogonal space || terms.h ||
+|| a,,lk,, to d,,lk,,|| `mat_a[l][k]`<br>`mat_d[l][k]` || `fn_a(int l, int k)`<br>`fn_d(int l, int k)` || Level 1 integral terms || lev1.h ||
+|| AC,,lk,,<br>alpha,,lk,,<br>A,,lk,,<br>B,,lk,,<br>C,,lk,,<br>D,,lk,,<br>f,,lk,,<br>f^-^,,lk,,|| `mat_AC[l][k]`<br>`mat_alpha[l][k]`<br>`mat_A[l][k]`<br>`mat_B[l][k]`<br>`mat_X[l][k]`<br>`mat_D[l][k]`<br>`mat_f[l][k]`<br>`mat_fminus[l][k]` || `fn_alpha(int l, int k)` || Level 2 integral terms || lev2.h ||
+|| beta,,mlk,,<br>phi,,mlk,,<br>g,,mlk,,<br>g^-^,,mlk,,<br>Q,,mlk,,<br>P,,mlk,,<br>E,,mlk,,<br>F,,nmlk,, || `mat_beta[m][l][k]`<br>`mat_phi[m][l][k]`<br>`mat_g[m][l][k]`<br>`mat_gminus[m][l][k]`<br>`mat_Q[m][l][k]`<br>`mat_P[m][l][k]`<br>`mat_E[m][l][k]`<br>`mat_F[n][m][l][k]`|| fn_beta(int m, int l, int k)<br>fn_phi(int m, int l, int k)<br>fn_g(int m, int l, int k)<br>fn_gminus(int m, int l, int k)<br>fn_Q(int m, int l, int k)<br>fn_P(int m, int l, int k)<br>fn_E(int m, int l, int k)<br>fn_F(int n, int m, int l, int k) || Level 3 integral terms || lev3.h||
