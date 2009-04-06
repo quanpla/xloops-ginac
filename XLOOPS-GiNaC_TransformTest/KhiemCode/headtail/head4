@@ -1,0 +1,41 @@
+#include <iostream>
+#include <cstdlib>
+#include <complex>
+// #include "mpi.h"
+extern "C" { 
+#include "vegas.h" 
+}
+#include <stdexcept>
+#include <fstream>
+#define DIMENSION 4
+#define FUNCTIONS 1
+
+/* Define parameter here */
+static int flag;
+
+using namespace std;
+
+std::complex<double> myC(double i, double j)
+{
+        
+std::complex<double> J(0,1);
+        return i + J * j;
+}
+
+double fabs(std::complex<double> x){
+	double r = x.real(), i = x.imag();
+	double return_data;
+
+	return_data = sqrt(pow(r, 2) + pow(i, 2));
+
+	return return_data;
+}
+
+void val(double xx[DIMENSION], double f[FUNCTIONS])
+{
+        double Pi = 3.1415926535897932385;
+        std::complex<double> J(0,1);
+        std::complex<double> some_t; 
+	double l0 = xx[0], l1 = xx[1], l2 = xx[2], lortho = xx[3];
+	double x = xx[0], y = xx[1], z = xx[2], t = xx[3];
+	some_t = 

@@ -1,0 +1,19 @@
+;
+	return return_data;
+}
+
+
+int main(int argc, char *argv[]){
+	double xstart, xstep, xend;
+	xstart = atof(argv[1]); xstep = atof(argv[2]); xend = atof(argv[3]);
+
+	// this is 1 dimensions integrand
+	double x1;
+	for(x1 = xstart; x1 < xend; x1 += xstep){
+		double integrand_value = fval(x1);
+		printf("%e\t%e\n", x1, integrand_value);
+	}
+
+	return EXIT_SUCCESS;
+}
+
