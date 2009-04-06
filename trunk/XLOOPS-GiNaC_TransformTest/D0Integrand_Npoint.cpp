@@ -33,27 +33,7 @@
 using namespace GiNaC;
 
 namespace xloops{
-	/**
-		G(z) & GZ(z)
-	*/
-	ex fn_G(int k, int l, int m, int n, const ex &z){
-		ex return_G = 0;
 
-		return_G = mat_beta[m][l][k] * ( mat_E[m][l][k]*z - mat_msquare[k] + I*Rho );
-		return_G += -( mat_P[m][l][k]*z + mat_Q[m][l][k]) * (z + mat_F[n][m][l][k]);
-		return_G = 1.0/return_G;
-
-		return return_G;
-	}
-	
-	ex fn_GZ(const ex &x, const ex &y){
-		ex return_GZ = 0;
-		
-		return_GZ = - (log(x) - log(y))/(x - y);
-		
-		return return_GZ;
-	}
-	
 	/*
 	To calculate equ 75, we need three things:
 	1.	The constant
@@ -65,7 +45,7 @@ namespace xloops{
 		The constant part of equ 75
 	 */
 		ex eq_75_cte = 0;
-		
+
 		return eq_75_cte;
 	}
 
@@ -74,7 +54,7 @@ namespace xloops{
 		The positive integrand of equ 75
 	 */
 		ex eq_75_posintegrand = 0;
-	
+
 		/* line 1*/
 		eq_75_posintegrand = -(/* fg + (f-)g */ mat_f[l][k]*mat_g[m][l][k] + mat_fminus[l][k]*mat_g[m][l][k] )
 			      * log(/*nom*/
@@ -86,7 +66,7 @@ namespace xloops{
 				/*denom*/
 			/ (mat_Q[m][l][k] + mat_P[m][l][k]*z)
 				   );
-	
+
 		/* line 2*/
 		eq_75_posintegrand += mat_f[l][k]*mat_g[m][l][k]
 				    * log(/*nom*/
@@ -98,7 +78,7 @@ namespace xloops{
 				/*denom*/
 			/ (mat_Q[m][l][k] + mat_P[m][l][k]*z)
 					 );
-	
+
 		/* line 3*/
 		eq_75_posintegrand += mat_f[l][k]*mat_gminus[m][l][k]
 					  * log(/*nom*/
@@ -112,7 +92,7 @@ namespace xloops{
 					       );
 		/// mul with G(z)
 		eq_75_posintegrand *= fn_G(k, l, m, n, z);
-		
+
 		return eq_75_posintegrand;
 	}
 
@@ -121,8 +101,8 @@ namespace xloops{
 		The negative integrand of equ 75
 	 */
 		ex eq_75_negintegrand = 0;
-	
-	
+
+
 		/* line 1*/
 		eq_75_negintegrand = mat_fminus[l][k]*mat_gminus[m][l][k]
 				    * log(/*nom*/
@@ -145,7 +125,7 @@ namespace xloops{
 				/*denom*/
 			/ (mat_Q[m][l][k] + mat_P[m][l][k]*z)
 					       );
-	
+
 		/* line 3*/
 		eq_75_negintegrand = -(/* (f-)(g-) + (f-)g */ (mat_fminus[l][k]*mat_gminus[m][l][k]) + mat_fminus[l][k]*mat_g[m][l][k])
 					  * log(/*nom*/
@@ -157,14 +137,14 @@ namespace xloops{
 				/*denom*/
 			/ (mat_Q[m][l][k] + mat_P[m][l][k]*z)
 					       );
-				
+
 		/// mul with G(z)
 		eq_75_negintegrand *= fn_G(k, l, m, n, z);
-		
+
 		return eq_75_negintegrand;
 	}
 
-	ex NPoint_75_01(){ 
+	ex NPoint_75_01(){
 /*
 		return the positive integrand. May include the constant or not.
 */
@@ -172,7 +152,7 @@ namespace xloops{
 		xloopsGiNaC_calc_lev2();
 		xloopsGiNaC_calc_lev3();
 		xloopsGiNaC_calc_lev4();
-	
+
 		ex z = realsymbol("z"), t = realsymbol("t");
 		ex integrand_75_01 = 0;
 
@@ -186,7 +166,7 @@ namespace xloops{
 		return integrand_75_01;
 	}
 
-	ex NPoint_75_02(){ 
+	ex NPoint_75_02(){
 /*
 		return the positive integrand. May include the constant or not.
 */
@@ -194,7 +174,7 @@ namespace xloops{
 		xloopsGiNaC_calc_lev2();
 		xloopsGiNaC_calc_lev3();
 		xloopsGiNaC_calc_lev4();
-	
+
 		ex z = realsymbol("z"), t = realsymbol("t");
 		ex integrand_75_02 = 0;
 
@@ -207,6 +187,57 @@ namespace xloops{
 
 		return integrand_75_02;
 	}
+
+
+ex NPoint_102_cte(int n, int m, int l, int k){
+	ex factor; // the return factor
+	const ex F = mat_F[n][m][l][k], beta = mat_beta[m][l][k], phi = mat_phi[m][l][k]
+		T1 = fn_T1(n, m, l, k), T2 = fn_T2(n, m, l, k), T3 = fn_T3(n, m, l, k), T4 = fn_T4(n, m, l, k),
+		flk = mat_f[l][k], gmlk = mat_g[m][l][k], fminuslk = mat_fminus[l][k], gminusmlk = mat_gminus[m][l][k];
+	const ex Z1beta = fn_Z1(n, m, l, k, beta), Z2beta = fn_Z2(n, m, l, k, beta), Z1phi = fn_Z1(n, m, l, k, phi), Z2phi = fn_Z2(n, m, l, k, phi);
+
+	ex factor1, factor2, factor3, factor4;
+
+	//1
+	factor1 = round_plus* abs(1.0 - mat_beta[m][l][k]*mat_phi[m][l][k])/ mat_P[m][l][k];
+	//2
+	factor2 = (flk+fminuslk) * gmlk * ( log(F/beta) - fn_Eta(n, m, l, k, beta) ) * fn_GZ(T3, T4);
+	//3
+	factor2+= flk*(gmlk + gminusmlk) * fn_Eta(n, m, l, k, phi) * fn_GZ(T3, T4);
+	//4
+	factor2+= gminusmlk*(
+	                      (flk+fminuslk) * fn_Eta(n, m, l, k, beta) - fminuslk*log(F/beta) - flk*log(-F/beta)
+	                    ) * fn_GZ(T1, T2);
+	//5
+	factor2+= -flk*(gmlk + gminusmlk) * fn_Eta(n, m, l, k, phi) * fn_GZ(T1, T2);
+	//6
+	factor2+= -flk*gmlk*fn_varLplus( (1.0 - beta*phi) / beta , F/beta, Rho /*use rho as the epsilon for now*/)
+		- flk*gminusmlk*fn_varLplus( -(1.0 - beta*phi)/beta, -F/beta, Rho );
+	//7
+	factor2+= fminuslk*(gmlk + gminusmlk) * fn_varLminus((1.0 - beta*phi)/beta, F/beta, Rho);
+	//8
+	factor2+= -(flk+fminuslk)*gmlk * ( fn_varLplus(P*beta, -P*beta*Z1beta) + fn_varLplus(1.0, -Z2beta) );
+	//9
+	factor2+= flk*(gmlk + gminusmlk) * ( fn_varLplus(P, Q) + fn_varLminus(P, Q) )
+		- fminuslk*(gmlk + gminusmlk) * ( fn_varLplus(P, Q) + fn_varLminus(P, Q) )
+
+	return factor;
+}
+
+ex NPoint_102_posIntegrand(int n, int m, int l, int k, const ex &z){
+
+}
+
+ex NPoint_102_negIntegrand(int n, int m, int l, int k, const ex &z){
+}
+
+ex int102(){// integrand102
+	ex return_int102 = 0;
+
+
+
+	return return_int102;
+} // integrand102
 
         /*******************************************************************************
 	**      the main call from outside to calculate the integral
