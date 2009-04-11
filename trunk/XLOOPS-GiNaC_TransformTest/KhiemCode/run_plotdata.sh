@@ -5,25 +5,24 @@ then
 	firstNum=$1; step=$2; lastNum=$3;
 else 
 	# edit this to change the default range of plotting data
-	firstNum=-10000; step=0.01; lastNum=10000;
+	firstNum=-100; step=1; lastNum=100;
 fi
 
 #	2.	Sset default output folder
-outputFolder="plotdata/";
+outputFolder="plotdata/"
 
 # 	3.	The main loop (loop all dataplot)
-# 1 9 12 18 30
-for equNo in 40 48 
+for equNo in 1 9 12 18
 do
 	# generate real  part
-	outputFileName="eq""$equNo""_real""_$firstNum""_$step""_$lastNum"".dat";
-	echo "Generating plotting data for integrand $equNo - real  part. File name: ""$outputFolder""$outputFileName";
-	exec/dataplot_eq"$equNo"_real.exe $firstNum $step $lastNum > "$outputFolder""$outputFileName"
+	outputFileName="eq""$equNo""_real""_$firstNum""_$step""_$lastNum"".dat"
+	echo "Generating plotting data for integrand $equNo - real  part. File name: ""$outputFolder""$outputFileName"
+	exec/dataplot_eq"$equNo"_real.exe "$first" "$step" "$last" > "$outputFolder""$outputFileName"
 
 	# generate image part
-	outputFileName="eq""$equNo""_imag""_$firstNum""_$step""_$lastNum"".dat";
-	echo "Generating plotting data for integrand $equNo - imag  part. File name: ""$outputFolder""$outputFileName";
-	exec/dataplot_eq"$equNo"_imag.exe $firstNum $step $lastNum > "$outputFolder""$outputFileName";
+	outputFileName="eq""$equNo""_imag""_$firstNum""_$step""_$lastNum"".dat"
+	echo "Generating plotting data for integrand $equNo - imag  part. File name: ""$outputFolder""$outputFileName"
+	exec/dataplot_eq"$equNo"_imag.exe "$first" "$step" "$last" > "$outputFolder""$outputFileName"
 
 #end of looping for each integrand equation
 done

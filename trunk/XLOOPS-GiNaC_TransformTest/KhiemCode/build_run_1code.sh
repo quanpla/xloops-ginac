@@ -18,57 +18,57 @@ echo "output integrand equation $equNo";
 
 if [ $type -eq 1 ];
 then
-	exec/calc_D0Integrand_real.exe $equNo $p10 $p20 $p21 $p30 $p31 $p32 $m1s $m2s $m3s $m4s > generatedcode/mid_eq"$equNo"_real;
-	exec/calc_D0Integrand_imag.exe $equNo $p10 $p20 $p21 $p30 $p31 $p32 $m1s $m2s $m3s $m4s > generatedcode/mid_eq"$equNo"_imag;
+        exec/calc_D0Integrand_real.exe $equNo $p10 $p20 $p21 $p30 $p31 $p32 $m1s $m2s $m3s $m4s > generatedcode/mid_eq"$equNo"_real;
+        exec/calc_D0Integrand_imag.exe $equNo $p10 $p20 $p21 $p30 $p31 $p32 $m1s $m2s $m3s $m4s > generatedcode/mid_eq"$equNo"_imag;
 elif [ $type -eq 2 ];
 then
 # we must pay a little much attention to case equation 18 and on, because it split into z=>0 and z<0
-	echo "(z>=0)?" > generatedcode/mid_eq"$equNo"_real;
-	exec/calc_D0Integrand_real.exe "$equNo"01 $p10 $p20 $p21 $p30 $p31 $p32 $m1s $m2s $m3s $m4s >> generatedcode/mid_eq"$equNo"_real;
-	echo ":" >> generatedcode/mid_eq"$equNo"_real;
-	exec/calc_D0Integrand_real.exe "$equNo"02 $p10 $p20 $p21 $p30 $p31 $p32 $m1s $m2s $m3s $m4s >> generatedcode/mid_eq"$equNo"_real;
+        echo "(z>=0)?" > generatedcode/mid_eq"$equNo"_real;
+        exec/calc_D0Integrand_real.exe "$equNo"01 $p10 $p20 $p21 $p30 $p31 $p32 $m1s $m2s $m3s $m4s >> generatedcode/mid_eq"$equNo"_real;
+        echo ":" >> generatedcode/mid_eq"$equNo"_real;
+        exec/calc_D0Integrand_real.exe "$equNo"02 $p10 $p20 $p21 $p30 $p31 $p32 $m1s $m2s $m3s $m4s >> generatedcode/mid_eq"$equNo"_real;
 
-	echo "(z>=0)?" > generatedcode/mid_eq"$equNo"_imag;
-	exec/calc_D0Integrand_imag.exe "$equNo"01 $p10 $p20 $p21 $p30 $p31 $p32 $m1s $m2s $m3s $m4s >> generatedcode/mid_eq"$equNo"_imag;
-	echo ":" >> generatedcode/mid_eq"$equNo"_imag;
-	exec/calc_D0Integrand_imag.exe "$equNo"02 $p10 $p20 $p21 $p30 $p31 $p32 $m1s $m2s $m3s $m4s >> generatedcode/mid_eq"$equNo"_imag;
+        echo "(z>=0)?" > generatedcode/mid_eq"$equNo"_imag;
+        exec/calc_D0Integrand_imag.exe "$equNo"01 $p10 $p20 $p21 $p30 $p31 $p32 $m1s $m2s $m3s $m4s >> generatedcode/mid_eq"$equNo"_imag;
+        echo ":" >> generatedcode/mid_eq"$equNo"_imag;
+        exec/calc_D0Integrand_imag.exe "$equNo"02 $p10 $p20 $p21 $p30 $p31 $p32 $m1s $m2s $m3s $m4s >> generatedcode/mid_eq"$equNo"_imag;
 elif [ $type -eq 4 ];
 then
-#	z	t	equivalent equation
-#	>=0	>=0	$equNo-01
-#	>=0	< 0	$equNo-02
-#	< 0	>=0	$equNo-03
-#	< 0	< 0	$equNo-04
+#       z       t       equivalent equation
+#       >=0     >=0     $equNo-01
+#       >=0     < 0     $equNo-02
+#       < 0     >=0     $equNo-03
+#       < 0     < 0     $equNo-04
 
-#	REAL CASES
+#       REAL CASES
 # z>=0, t>=0
-	echo "(z>=0)?(t>=0?" 	> 	generatedcode/mid_eq$equNo_real;
-	exec/calc_D0Integrand_real.exe "$equNo"01 $p10 $p20 $p21 $p30 $p31 $p32 $m1s $m2s $m3s $m4s >> generatedcode/mid_eq$equNo_real;
+        echo "(z>=0)?(t>=0?"    >       generatedcode/mid_eq$equNo_real;
+        exec/calc_D0Integrand_real.exe "$equNo"01 $p10 $p20 $p21 $p30 $p31 $p32 $m1s $m2s $m3s $m4s >> generatedcode/mid_eq$equNo_real;
 # z>=0, t< 0
-	echo ":" 		>> 	generatedcode/mid_eq$equNo_real;
-	exec/calc_D0Integrand_real.exe "$equNo"02 $p10 $p20 $p21 $p30 $p31 $p32 $m1s $m2s $m3s $m4s >> generatedcode/mid_eq$equNo_real;
+        echo ":"                >>      generatedcode/mid_eq$equNo_real;
+        exec/calc_D0Integrand_real.exe "$equNo"02 $p10 $p20 $p21 $p30 $p31 $p32 $m1s $m2s $m3s $m4s >> generatedcode/mid_eq$equNo_real;
 # z< 0, t>=0
-	echo "):(t>=0?" 	>> 	generatedcode/mid_eq$equNo_real;
-	exec/calc_D0Integrand_real.exe "$equN"o03 $p10 $p20 $p21 $p30 $p31 $p32 $m1s $m2s $m3s $m4s >> generatedcode/mid_eq$equNo_real;
+        echo "):(t>=0?"         >>      generatedcode/mid_eq$equNo_real;
+        exec/calc_D0Integrand_real.exe "$equN"o03 $p10 $p20 $p21 $p30 $p31 $p32 $m1s $m2s $m3s $m4s >> generatedcode/mid_eq$equNo_real;
 # z< 0, t< 0
-	echo ":" 		>> 	generatedcode/mid_eq$equNo_real;
-	exec/calc_D0Integrand_real.exe "$equNo"04 $p10 $p20 $p21 $p30 $p31 $p32 $m1s $m2s $m3s $m4s >> generatedcode/mid_eq$equNo_real;
-	echo ")"		>> 	generatedcode/mid_eq$equNo_real;
+        echo ":"                >>      generatedcode/mid_eq$equNo_real;
+        exec/calc_D0Integrand_real.exe "$equNo"04 $p10 $p20 $p21 $p30 $p31 $p32 $m1s $m2s $m3s $m4s >> generatedcode/mid_eq$equNo_real;
+        echo ")"                >>      generatedcode/mid_eq$equNo_real;
 
-#	IMAGINARY CASES
+#       IMAGINARY CASES
 # z>=0, t>=0
-	echo "(z>=0)?(t>=0?" 	> 	generatedcode/mid_eq$equNo_imag
-	exec/calc_D0Integrand_imag.exe "$equNo"01 $p10 $p20 $p21 $p30 $p31 $p32 $m1s $m2s $m3s $m4s >> generatedcode/mid_eq$equNo_imag;
+        echo "(z>=0)?(t>=0?"    >       generatedcode/mid_eq$equNo_imag
+        exec/calc_D0Integrand_imag.exe "$equNo"01 $p10 $p20 $p21 $p30 $p31 $p32 $m1s $m2s $m3s $m4s >> generatedcode/mid_eq$equNo_imag;
 # z>=0, t< 0
-	echo ":" 		>> 	generatedcode/mid_eq$equNo_imag;
-	exec/calc_D0Integrand_imag.exe "$equNo"02 $p10 $p20 $p21 $p30 $p31 $p32 $m1s $m2s $m3s $m4s >> generatedcode/mid_eq$equNo_imag;
+        echo ":"                >>      generatedcode/mid_eq$equNo_imag;
+        exec/calc_D0Integrand_imag.exe "$equNo"02 $p10 $p20 $p21 $p30 $p31 $p32 $m1s $m2s $m3s $m4s >> generatedcode/mid_eq$equNo_imag;
 # z< 0, t>=0
-	echo "):(t>=0?" 	>> 	generatedcode/mid_eq$equNo_imag;
-	exec/calc_D0Integrand_imag.exe "$equNo"03 $p10 $p20 $p21 $p30 $p31 $p32 $m1s $m2s $m3s $m4s >> generatedcode/mid_eq$equNo_imag;
+        echo "):(t>=0?"         >>      generatedcode/mid_eq$equNo_imag;
+        exec/calc_D0Integrand_imag.exe "$equNo"03 $p10 $p20 $p21 $p30 $p31 $p32 $m1s $m2s $m3s $m4s >> generatedcode/mid_eq$equNo_imag;
 # z< 0, t< 0
-	echo ":" 		>> 	generatedcode/mid_eq$equNo_imag;
-	exec/calc_D0Integrand_imag.exe "$equNo"04 $p10 $p20 $p21 $p30 $p31 $p32 $m1s $m2s $m3s $m4s >> generatedcode/mid_eq$equNo_imag;
-	echo ")"		>> 	generatedcode/mid_eq$equNo_imag;
+        echo ":"                >>      generatedcode/mid_eq$equNo_imag;
+        exec/calc_D0Integrand_imag.exe "$equNo"04 $p10 $p20 $p21 $p30 $p31 $p32 $m1s $m2s $m3s $m4s >> generatedcode/mid_eq$equNo_imag;
+        echo ")"                >>      generatedcode/mid_eq$equNo_imag;
 fi
 
 

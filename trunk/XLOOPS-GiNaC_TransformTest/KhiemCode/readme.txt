@@ -47,3 +47,8 @@ all executable code will go to exec folder
 all data file (to plot) should go to plotdata folder
 all vegas executing result should go to vegasresult folder
 
+IV.	Howto add a new build_run_code
+The script build_run_code calls build_run_1code to create:
+1./ The source file
+	+
+2./ The exe file
