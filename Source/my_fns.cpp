@@ -34,9 +34,6 @@ namespace xloops{
 	ex my_evalf(const ex &x){
 		ex return_value;
 	
-	//	1.	Subs Rho's
-		return_value = x.subs(lst(Rho == input_Rho, Rho1 == input_Rho1, Rho2 == input_Rho2));
-	
 	//	Last: evaluate
 		return_value = return_value.evalf();
 	

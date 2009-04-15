@@ -1,10 +1,16 @@
-g++ -c `pkg-config --cflags --libs ginac` trm2F.cpp
-g++ -c `pkg-config --cflags --libs ginac` my_fns.cpp
-g++ -c `pkg-config --cflags --libs ginac` trmchk.cpp
-g++ -c `pkg-config --cflags --libs ginac` lev1.cpp
-g++ -c `pkg-config --cflags --libs ginac` lev2.cpp
-g++ -c `pkg-config --cflags --libs ginac` lev3.cpp
-g++ -c `pkg-config --cflags --libs ginac` lev4.cpp
-g++ -c `pkg-config --cflags --libs ginac` lev5.cpp
-g++ `pkg-config --cflags --libs ginac` -o test.exe test.cpp trm2F.o my_fns.o trmchk.o lev1.o lev2.o lev3.o lev4.o lev5.o
+for fileName in "my_fns" "trmchk" "lev1" "lev2" "lev3" "lev4" "lev5"
+do
+        if ! [ -f "$fileName.o" ];
+        then
+                echo "Building the object file $fileName.o"
+                g++ `pkg-config --cflags --libs ginac` -c "$fileName".cpp
+        else
+                        echo "$fileName.o existed! No thing happened."
+        fi
+done
+
+echo "building test.exe"
+g++ `pkg-config --cflags --libs ginac` -o test.exe test.cpp my_fns.o trmchk.o lev1.o lev2.o lev3.o lev4.o lev5.o
+
+echo "now execute: ./test.exe OR ./run.sh"
 

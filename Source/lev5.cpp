@@ -39,10 +39,10 @@ namespace xloops{
 	ex fn_OPlus (int n, int m, int l, int k){
 		ex OPlus_nmlk;
 		//init
-		ex f = fn_f(l, k), fminus = fn_fminus(l, k), g = fn_g(l, k), gminus = fn_gminus(m, l, k),
+		ex f = fn_f(l, k), fminus = fn_fminus(l, k), g = fn_g(m, l, k), gminus = fn_gminus(m, l, k),
 			F = fn_F(n, m, l, k), beta = fn_beta(m, l, k), P = fn_P(m, l, k), z1beta = fn_z1beta(m, l, k), z2beta = fn_z2beta(m, l, k), z1phi = fn_z1phi(m, l, k), z2phi = fn_z2phi(m, l, k),
 		phi = fn_phi(m, l, k);
-		check0denom(beta_mlk, "OPlus", n, m,l ,k);
+		check0denom(beta, "OPlus", n, m,l ,k);
 
 	 // calculate
 		OPlus_nmlk = (f*g + fminus*g)*log(F/beta);
@@ -56,10 +56,10 @@ namespace xloops{
 	ex fn_OMinus (int n, int m, int l, int k){
 		ex OMinus_nmlk;
 		//init
-		ex f = fn_f(l, k), fminus = fn_fminus(l, k), g = fn_g(l, k), gminus = fn_gminus(m, l, k),
+		ex f = fn_f(l, k), fminus = fn_fminus(l, k), g = fn_g(m, l, k), gminus = fn_gminus(m, l, k),
 			F = fn_F(n, m, l, k), beta = fn_beta(m, l, k), P = fn_P(m, l, k), z1beta = fn_z1beta(m, l, k), z2beta = fn_z2beta(m, l, k), z1phi = fn_z1phi(m, l, k), z2phi = fn_z2phi(m, l, k),
 		phi = fn_phi(m, l, k);
-		check0denom(beta_mlk, "OPlus", n, m,l ,k);
+		check0denom(beta, "OPlus", n, m,l ,k);
 
 	 // calculate
 		OMinus_nmlk = -fminus*gminus*log(F/beta) - f*gminus*log(-F/beta);

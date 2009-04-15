@@ -118,7 +118,7 @@ namespace xloops{
 		 ** Q_mlk = -2 ( ------- + ------- beta_mlk )
 		 ** B_mlk AC_lk
   **/
-  		ex B_mlk = fn_B(m, l, k), AC_lk = fn_AC(l, k), C_mlk = fn_C(l, k), beta_mlk = fn_beta(m, l, k), d_lk = fn_d(l, k);
+  		ex B_mlk = fn_B(m, l, k), AC_lk = fn_AC(l, k), C_mlk = fn_C(m, l, k), beta_mlk = fn_beta(m, l, k), d_lk = fn_d(l, k);
   		
   		check0denom(B_mlk, "Q", m, l, k);
 		check0denom(AC_lk, "Q", m, l, k);
@@ -127,27 +127,35 @@ namespace xloops{
 		return Q_mlk;
 	}
 	ex fn_Q_im (int m, int l, int k){
+		//init
 		ex Q_mlk_im;
- 
+ 		ex Q_mlk = fn_Q(m, l, k);
+
+		//calc.
 		Q_mlk_im = imag_part(Q_mlk);
 		return Q_mlk_im;
 	}
 	ex fn_Q_re (int m, int l, int k){
+		//init
 		ex Q_mlk_re;
- 
+ 		ex Q_mlk = fn_Q(m, l, k);
+
+		//calc.
 		Q_mlk_re = real_part(Q_mlk);
 		return Q_mlk_re;
 	}
 	ex fn_Q_conj (int m, int l, int k){
 		ex Q_mlk_conj;
- 
+  		ex Q_mlk = fn_Q(m, l, k);
+
+		//calc.
 		Q_mlk_conj = Q_mlk.conjugate();
 		return Q_mlk_conj;
 	}
 
 	ex fn_P (int m, int l, int k){
 		ex P_mlk;
-  		ex A_mlk = fn_A(m, l, k), B_mlk = fn_B(m, l, k), D_mlk = fn_D(m, l, k), phi_mlk = fn_phi(m, l, k);
+  		ex A_mlk = fn_A(m, l, k), B_mlk = fn_B(m, l, k), D_mlk = fn_D(m, l, k), phi_mlk = fn_phi(m, l, k), alpha_lk = fn_alpha(l, k), beta_mlk = fn_beta(m, l, k);
   		
 		check0denom(B_mlk, "P", m, l, k);
  
@@ -162,11 +170,7 @@ namespace xloops{
 
 	ex fn_E (int m, int l, int k){
 		ex E_mlk;
- /** d_lk C_mlk
-		 ** E_mlk = -2 ( ------- + ------- phi_mlk )
-		 ** AC_lk B_mlk
-  **/
-  	ex B_mlk = fn_B(m, l, k), C_mlk = fn_C(m, l, k), AC_lk = fn_AC(l, k), d_lk = fn_d(l, k);
+	  	ex B_mlk = fn_B(m, l, k), C_mlk = fn_C(m, l, k), AC_lk = fn_AC(l, k), d_lk = fn_d(l, k), phi_mlk = fn_phi(m, l, k);
 		check0denom(B_mlk, "E", m, l, k);
 		check0denom(AC_lk, "E", m, l, k);
  
@@ -175,14 +179,20 @@ namespace xloops{
 		return E_mlk;
 	}
 	ex fn_E_im (int m, int l, int k){
+		//init
 		ex E_mlk_im;
- 
+ 		ex E_mlk = fn_E(m, l, k);
+
+		// calc 
 		E_mlk_im = imag_part(E_mlk);
 		return E_mlk_im;
 	}
 	ex fn_E_re (int m, int l, int k){
+		// init
 		ex E_mlk_re;
- 
+ 		ex E_mlk = fn_E(m, l, k);
+
+		// calc
 		E_mlk_re = real_part(E_mlk);
 		return E_mlk_re;
 	}
@@ -203,9 +213,12 @@ namespace xloops{
 		return F_nmlk;
 	}
 	ex fn_F_im (int n, int m, int l, int k){
+		// init
 		ex F_nmlk_im;
- 
-		F_nmlk_im = imag_part(Fn_mlk);
+ 		ex F_nmlk = fn_F(n, m, l, k);
+
+		// calc.
+		F_nmlk_im = imag_part(F_nmlk);
 		return F_nmlk_im;
 	}
 

@@ -145,7 +145,7 @@ namespace xloops{
 		check0denom(AC_lk, "f", l, k);
 		
 	
-		ex factor = - mat_d_im[l][k]/AC_lk;
+		ex factor = - im_d_lk/AC_lk;
 		return myfn_f(factor);
 	}
 
@@ -164,10 +164,10 @@ namespace xloops{
 
 	REGISTER_FUNCTION(myfn_fminus, eval_func(myfn_fminus_eval));
 	ex fn_fminus (int l, int k){
-		ex denom = AC_lk;
-		check0denom(denom, "fminus", l, k);
+		ex AC_lk = fn_AC(l, k), im_d_lk = fn_d(l, k);
+		check0denom(AC_lk, "fminus", l, k);
 		
-		ex factor = - mat_d_im[l][k]/denom;
+		ex factor = - im_d_lk/AC_lk;
 		return myfn_fminus(factor);
 	}
 }// Namespace xloops
