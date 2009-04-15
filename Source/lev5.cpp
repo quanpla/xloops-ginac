@@ -13,7 +13,7 @@
 **			Quan, Phan 	(anhquan.phanle@gmail.com)
 ********************************************************************************
 **
-**	Level 5 functions
+**	Level 7 functions
 **
 ********************************************************************************
 **
@@ -27,104 +27,47 @@
 #include "extrm.h"
 #include "my_fns.h"
 #include "trmchk.h"
+#include "lev1.h"
+#include "lev2.h"
+#include "lev3.h"
+#include "lev4.h"
 #include "lev5.h"
 
 using namespace GiNaC;
 namespace xloops{
-	//	II.5	Level 5 Variable Functions
-	ex fn_Q (int m, int l, int k){
-		ex Q_mlk;
-	 /**               C_mlk     d_lk
-		 ** Q_mlk = -2 ( ------- + ------- beta_mlk )
-		 **               B_mlk     AC_lk
-	  **/
-		check0denom(mat_B[m][l][k], "Q", m, l, k);
-		check0denom(mat_AC[l][k], "Q", m, l, k);
-		
-		Q_mlk = -( mat_C[m][l][k]/mat_B[m][l][k] + mat_beta[m][l][k]*mat_d[l][k]/ mat_AC[l][k] ) * 2.0;
-		return Q_mlk;
-	}
-	ex fn_Q_im (int m, int l, int k){
-		ex Q_mlk_im;
-		
-		Q_mlk_im = imag_part(mat_Q[m][l][k]);
-		return Q_mlk_im;
-	}
-	ex fn_Q_re (int m, int l, int k){
-		ex Q_mlk_re;
-		
-		Q_mlk_re = real_part(mat_Q[m][l][k]);
-		return Q_mlk_re;
-	}
-	ex fn_Q_conj (int m, int l, int k){
-		ex Q_mlk_conj;
+
+	ex fn_OPlus (int n, int m, int l, int k){
+		ex OPlus_nmlk;
+		//init
+		ex f = fn_f(l, k), fminus = fn_fminus(l, k), g = fn_g(l, k), gminus = fn_gminus(m, l, k),
+			F = fn_F(n, m, l, k), beta = fn_beta(m, l, k), P = fn_P(m, l, k), z1beta = fn_z1beta(m, l, k), z2beta = fn_z2beta(m, l, k), z1phi = fn_z1phi(m, l, k), z2phi = fn_z2phi(m, l, k),
+		phi = fn_phi(m, l, k);
+		check0denom(beta_mlk, "OPlus", n, m,l ,k);
+
+	 // calculate
+		OPlus_nmlk = (f*g + fminus*g)*log(F/beta);
+		OPlus_nmlk += -2.0*Pi*I*( f*g + fminus*g )*my_step(imag_part(-P*z1beta/beta))*my_step(imag_part(z2beta));
+		OPlus_nmlk += 2.0*Pi*I*f*g*my_step(imag_part(P*phi*z1phi))*my_step(imag_part(z2phi));
+		OPlus_nmlk += -2.0*Pi*I*f*gminus*my_step(-imag_part(P*phi*z1phi))*my_step(-imag_part(z2phi));
 	
-		Q_mlk_conj = mat_Q[m][l][k].conjugate();
-		return Q_mlk_conj;
+		return OPlus_nmlk;
 	}
 
-	ex fn_P (int m, int l, int k){
-		ex P_mlk;
-	 	/**               A_mlk 
-		 ** P_mlk = -2 [( ------- - alpha_lk) * (1 + beta_mlk.phi_mlk) - D_mlk . beta_mlk - phi_mlk ]
-		 **                B_mlk
-	  	**/
-		check0denom(mat_B[m][l][k], "P", m, l, k);
-		
-		P_mlk = -(
-			  (mat_A[m][l][k] / mat_B[m][l][k] - mat_alpha[l][k]) *(1 + mat_beta[m][l][k]*mat_phi[m][l][k])
-				- mat_D[m][l][k]*mat_beta[m][l][k] 
-				- mat_phi[m][l][k]
-			 ) * 2.0;
-		return P_mlk;
-	}
+	ex fn_OMinus (int n, int m, int l, int k){
+		ex OMinus_nmlk;
+		//init
+		ex f = fn_f(l, k), fminus = fn_fminus(l, k), g = fn_g(l, k), gminus = fn_gminus(m, l, k),
+			F = fn_F(n, m, l, k), beta = fn_beta(m, l, k), P = fn_P(m, l, k), z1beta = fn_z1beta(m, l, k), z2beta = fn_z2beta(m, l, k), z1phi = fn_z1phi(m, l, k), z2phi = fn_z2phi(m, l, k),
+		phi = fn_phi(m, l, k);
+		check0denom(beta_mlk, "OPlus", n, m,l ,k);
 
-	ex fn_E (int m, int l, int k){
-		ex E_mlk;
-	 	/**               d_lk      C_mlk
-		 ** E_mlk = -2 ( ------- + ------- phi_mlk )
-		 **               AC_lk     B_mlk
-	  	**/
-		check0denom(mat_B[m][l][k], "E", m, l, k);
-		check0denom(mat_AC[l][k], "E", m, l, k);
-		
-		E_mlk = -(
-			  mat_d[l][k]/mat_AC[l][k] 
-				+ mat_phi[m][l][k] * mat_C[m][l][k]/mat_B[m][l][k]
-			 ) * 2.0;
-		return E_mlk;
-	}
-	ex fn_E_im (int m, int l, int k){
-		ex E_mlk_im;
-		
-		E_mlk_im = imag_part(mat_E[m][l][k]);
-		return E_mlk_im;
-	}
-	ex fn_E_re (int m, int l, int k){
-		ex E_mlk_re;
-		
-		E_mlk_re = real_part(mat_E[m][l][k]);
-		return E_mlk_re;
-	}
-
-	ex fn_F (int n, int m, int l, int k){
-		ex F_nmlk;
-	 	/**           C_nlk.B_mlk - C_mlk.B_nlk
-		 ** F_nmlk = ---------------------------
-		 **           A_nlk.B_mlk - A_mlk.B_nlk
-	  	**/
-		ex denom = mat_A[n][l][k] * mat_B[m][l][k] - mat_A[m][l][k] * mat_B[n][l][k];
-		check0denom(denom, "F", m, l, k);
-		
-		F_nmlk = mat_C[n][l][k]*mat_B[m][l][k] - mat_C[m][l][k]*mat_B[n][l][k];
-		F_nmlk /= denom;
-		return F_nmlk;
-	}
-	ex fn_F_im (int n, int m, int l, int k){
-		ex F_nmlk_im;
-	 	
-		F_nmlk_im = imag_part(mat_F[n][m][l][k]);
-		return F_nmlk_im;
+	 // calculate
+		OMinus_nmlk = -fminus*gminus*log(F/beta) - f*gminus*log(-F/beta);
+		OMinus_nmlk += 2.0*Pi*I*fminus*gminus*my_step(imag_part(-P*z1beta/beta))*my_step(imag_part(z2beta));
+		OMinus_nmlk += -2.0*Pi*I*f*gminus*my_step(imag_part(-P*z1beta/beta))*my_step(-imag_part(z2beta));
+		OMinus_nmlk += -2.0*Pi*I*(fminus*gminus + fminus*g)*my_step(-imag_part(P*phi*z1phi))*my_step(imag_part(z2phi));
+	
+		return OMinus_nmlk;
 	}
 
 }// Namespace xloops

@@ -33,17 +33,17 @@
 using namespace std;
 
 namespace xloops{
+	ex fn_beta (int m, int l, int k);
+	ex fn_phi (int m, int l, int k);
+	ex fn_g (int m, int l, int k);	
+	ex fn_gminus (int m, int l, int k);
+	DECLARE_FUNCTION_1P(myfn_g);
+	DECLARE_FUNCTION_1P(myfn_gminus);
 
-	//	III.3	Level 3 Variable Functions
-	ex fn_A (int m, int l, int k);
-	ex fn_B (int m, int l, int k);
-	ex fn_C (int m, int l, int k); ex fn_C_im (int m, int l, int k); ex fn_C_re (int m, int l, int k); ex fn_C_conj (int m, int l, int k);
-	ex fn_D (int m, int l, int k);
-	ex fn_f (int l, int k);
-	ex fn_fminus (int l, int k);
-	DECLARE_FUNCTION_1P(myfn_f);//because there is if condition
-	DECLARE_FUNCTION_1P(myfn_fminus);//because there is if condition
-
+	ex fn_Q (int m, int l, int k); ex fn_Q_im(int m, int l, int k); ex fn_Q_re(int m, int l, int k); ex fn_Q_conj(int m, int l, int k);
+	ex fn_P (int m, int l, int k);
+	ex fn_E (int m, int l, int k); ex fn_E_im(int m, int l, int k); ex fn_E_re(int m, int l, int k);
+	ex fn_F(int n, int m, int l, int k); ex fn_F_im(int n, int m, int l, int k); 
 }	// Namespace xloops
 
 #endif 	// __XLOOPS_ONELOOP_4PT_LEV3_H__

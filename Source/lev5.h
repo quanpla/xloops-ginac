@@ -33,13 +33,10 @@
 using namespace std;
 
 namespace xloops{
-
-	//	III.5	Level 5 Variable Functions
-	ex fn_Q (int m, int l, int k); ex fn_Q_im(int m, int l, int k); ex fn_Q_re(int m, int l, int k); ex fn_Q_conj(int m, int l, int k);
-	ex fn_P (int m, int l, int k);
-	ex fn_E (int m, int l, int k); ex fn_E_im(int m, int l, int k); ex fn_E_re(int m, int l, int k);
-	ex fn_F(int n, int m, int l, int k); ex fn_F_im(int n, int m, int l, int k);
-
+	//	Lower levels enough to calculate D0 integrate using Vegas, we need this level
+	// for linearize the integral more.
+	ex fn_OPlus (int n, int m, int l, int k);
+	ex fn_OMinus (int n, int m, int l, int k);
 }	// Namespace xloops
 
 #endif 	// __XLOOPS_ONELOOP_4PT_LEV5_H__
