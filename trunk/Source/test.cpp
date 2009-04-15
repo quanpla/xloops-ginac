@@ -1,33 +1,24 @@
 #include <iostream>
 
 #include "ginac/ginac.h"
-#include "OneLoop4Pt.h"
+#include "trm.h"
+#include "lev1.h"
+#include "lev2.h"
+#include "lev3.h"
+#include "lev4.h"
+#include "lev5.h"
+#include "my_fns.h"
 
 using namespace std;
 using namespace GiNaC;
 using namespace xloops;
 
-ex p2q(const ex &p){
-	ex p12, p23, p13, p1s, p2s, p3s, p4s, p12s, p23s;
-	ex q, q10, q20, q21, q30, q31, q32;
-	
-	p1s = p.op(0); p2s = p.op(1); p3s = p.op(2); p4s = p.op(3);
-	p12s = p.op(4); p23s = p.op(5);
-		
-	p12 = (p12s - p1s - p2s)/2.0;
-	p23 = (p23s - p2s - p3s)/2.0;
-	p13 = (p2s + p4s - p12s - p23s)/2.0;
-	
-	q10 = sqrt(p1s);
-	q20 = p12/sqrt(p1s) + sqrt(p1s);
-	q21 = sqrt( pow(p12/sqrt(p1s) + sqrt(p1s),2) - p12s );
-	q30 = p13/sqrt(p1s) + p12/sqrt(p1s) + sqrt(p1s);
-	q31 = (q30*q20 - p12s - p13 - p23) / q21;
-	q32 = sqrt( pow(q30,2) - pow(q31,2) - p4s );
-	
-	q = lst(q10, q20, q21, q30, q31, q32);
-	
-	return q;
+void init(const ex& q_, const ex& m_, const ex& Rho_, const ex& Rho1_, const ex& Rho2_){
+	mat_msquare[0]=m_.op(0);	mat_msquare[1]=m_.op(1);	mat_msquare[2]=m_.op(2);	mat_msquare[3]=m_.op(3);
+	mat_q[0][0]=q_.op(0);mat_q[0][1]=0;mat_q[0][2]=0;mat_q[0][3]=0;
+	mat_q[1][0]=q_.op(1);mat_q[1][1]=q_.op(2);mat_q[1][2]=0;mat_q[1][3]=0;
+	mat_q[2][0]=q_.op(3);mat_q[2][1]=q_.op(4);mat_q[2][2]=q_.op(5);mat_q[2][3]=0;
+	Rho = Rho_; Rho1 = Rho1_; Rho2 = Rho2_;
 }
 
 int main(){
@@ -37,12 +28,21 @@ int main(){
 	m = lst(6561, 8281, 6561, 8281);
 	p = lst(1, 5, 1, 7, 15, 1);
 	// convert p --> q
-	q = p2q(p);
+	q = p2q(p); // definition of the p2q function is in my_fns.h
 	Rho = 1e-20; Rho1 = 1e-21; Rho2 = 1e-23;
 	
-	cout << "Starting calculating.\n";
-	D0 = fn_1Loop4Pt(q, m, Rho, Rho1, Rho2);
-	cout << "Finish calculating.\n" << D0.evalf() << endl;
+	init(q, p, Rho, Rho1, Rho2);
+	
+	// from here you can print any function you want, let have an example:
+	for (int l = 0; l<4; l++){
+		for (int k = 0; k<4; k++){
+			if (l!=k)
+				cout << "a_" << l+1 << k+1 << " = " << fn_a(l, k) << "\t";
+			else
+				cout << "###\t";
+		}
+		cout << endl;
+	}
 	
 	return EXIT_SUCCESS;
 }

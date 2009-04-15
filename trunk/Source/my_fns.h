@@ -38,24 +38,7 @@ namespace xloops{
 	DECLARE_FUNCTION_1P(my_is_positive);
 
 	ex my_evalf(const ex &x);
-
-
-
-	//	III.9	Misc. Functions
-	DECLARE_FUNCTION_1P(myfn_delta);//Delta Function
-	DECLARE_FUNCTION_1P(myfn_IvZero);
-	DECLARE_FUNCTION_1P(myfn_Zero);
-	DECLARE_FUNCTION_1P(myfn_IvTheta);
-	DECLARE_FUNCTION_1P(myfn_Sign0);
-	DECLARE_FUNCTION_2P(fn_eta);
-
-	ex fn_eta_plus(const ex &sigma, const ex &z1, const ex &z2, const ex &P);
-	ex fn_eta_minus(const ex &sigma, const ex &z1, const ex &z2, const ex &P);
-
-	ex fn_R(const ex &T1, const ex &T2);
-	ex fn_LogACG(const ex &a, const ex &b, const ex &x, const ex &y);
-	ex fn_LogARG(const ex &a, const ex &b, const ex &x, const ex &y);
-	ex fn_LogAG(const ex &a, const ex &b, const ex &x, const ex &y);
-
+ 
+	ex p2q(const ex &p); // convert p to q
 }	// Namespace xloops
 #endif 	//  __XLOOPS_ONELOOP_4PT_MY_FUNS_H__

@@ -33,55 +33,57 @@ namespace xloops{
 
 	//	II.1	Level 1 Variable Functions
 	ex fn_a (int l, int k){
-	 /** *****************************************************************************
-		 **	a_lk =     2.(q_l0 - q_k0)
-	  *****************************************************n****************************/
-		return (mat_q[l][0] - mat_q[k][0])*2.0;
+		// init
+		ex q_l0 = mat_q[l][0], q_k0 = mat_q[k][0];
+		
+		// calc.
+		return 2.0*(q_l0 - q_k0);
 	}
 
 	ex fn_b(int l, int k){
-	 /** *****************************************************************************
-		 **	b_lk =     -2.(q_l1 - q_k1)
-	  *********************************************************************************/
-		return -(mat_q[l][1] - mat_q[k][1])*2.0;
+		// init
+		ex q_l1 = mat_q[l][1], q_k1 = mat_q[k][1];
+		
+		// calc.
+		return 2.0*(q_l1 - q_k1);
 	}
 
 	ex fn_c (int l, int k){
-	 /** *****************************************************************************
-		 **	c_lk =     -2.(q_l2 - q_k2)
-	  *********************************************************************************/
-		ex c_lk;
-		c_lk = -(mat_q[l][2] - mat_q[k][2])*2.0;
-		return c_lk;
+		// init
+		ex q_l2 = mat_q[l][2], q_k2 = mat_q[k][2];
+		
+		// calc.
+		return 2.0*(q_l2 - q_k2);
 	}
 
 	ex fn_d (int l, int k){
-	 /** *****************************************************************************
-		 **	d_lk =     (q_l - q_k)^2  -  (m_l^2 - m_k^2)
-	  *********************************************************************************/
+		// init
+		ex q_l0 = mat_q[l][0], q_l1 = mat_q[l][1], q_l2 = mat_q[l][2], q_l3 = mat_q[l][3],
+			q_k0 = mat_q[k][0], q_k1 = mat_q[k][1], q_k2 = mat_q[k][2], q_k3 = mat_q[k][3],
+			msquare_l = mat_msquare[l], msquare_k = mat_msquare[k];
+
 		ex d_lk;
-		ex temp = 0;
-	
-		temp = pow(mat_q[l][0] - mat_q[k][0], 2);
-	
-		for(int ii = 1; ii<4; ii++){
-			temp -= pow(mat_q[l][ii]-mat_q[k][ii],2);
-		}
-	
-		d_lk = temp - (mat_msquare[l] - mat_msquare[k]);
+		// calc.
+		d_lk = pow(q_l0 - q_k0, 2) - pow(q_l1 - q_k1, 2) - pow(q_l2 - q_k2, 2) - pow(q_l3 - q_k3, 2)
+			- (msquare_l - msquare_k);
+		
 		return d_lk;
 	}
 	ex fn_d_im (int l, int k){
 		/** image part of d_lk*/
-		return imag_part(mat_d[l][k]);
+		ex d_lk = fn_d(l, k);
+		return imag_part(d_lk);
 	}
 	ex fn_d_re (int l, int k){
 		/** real part of d_lk*/
-		return real_part(mat_d[l][k]);
+		ex d_lk = fn_d(l, k);
+		return real_part(d_lk);
 	}
 	ex fn_d_conj (int l, int k){
-		/** real part of d_lk*/
-		return mat_d[l][k].conjugate();
+		/** conjugate of d_lk*/
+		ex d_lk = fn_d(l, k);
+		return d_lk.conjugate();
 	}
 
+	// continue to see lev2.cpp
 }// Namespace xloops

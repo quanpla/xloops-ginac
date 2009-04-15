@@ -33,13 +33,20 @@
 using namespace std;
 
 namespace xloops{
-	//	III.4	Level 4 Variable Functions
-	ex fn_beta (int m, int l, int k);
-	ex fn_phi (int m, int l, int k);
-	ex fn_g (int m, int l, int k);	
-	ex fn_gminus (int m, int l, int k);
-	DECLARE_FUNCTION_1P(myfn_g);
-	DECLARE_FUNCTION_1P(myfn_gminus);
+	ex fn_z1phi (int m, int l, int k);
+	ex fn_z2phi (int m, int l, int k);
+	ex fn_z3phi (int m, int l, int k);
+	ex fn_z4phi (int m, int l, int k);
+	ex fn_z1beta (int m, int l, int k);
+	ex fn_z2beta (int m, int l, int k);
+	ex fn_z3beta (int m, int l, int k);
+	ex fn_z4beta (int m, int l, int k);
+
+	ex fn_T1 (int n, int m, int l, int k);
+	ex fn_T2 (int n, int m, int l, int k);
+	ex fn_T3 (int n, int m, int l, int k);
+	ex fn_T4 (int n, int m, int l, int k);
+	
 }	// Namespace xloops
 
 #endif 	// __XLOOPS_ONELOOP_4PT_LEV4_H__

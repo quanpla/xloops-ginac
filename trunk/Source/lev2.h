@@ -34,9 +34,22 @@ using namespace std;
 
 namespace xloops{
 
-	//	III.2	Level 2 Variable Functions
 	ex fn_AC (int l, int k);
-	ex fn_alpha (int l, int k);
+
+	ex fn_A (int m, int l, int k);
+	ex fn_B (int m, int l, int k);
+	ex fn_C (int m, int l, int k); ex fn_C_im (int m, int l, int k); ex fn_C_re (int m, int l, int k); ex fn_C_conj (int m, int l, int k);
+
+	ex fn_D (int m, int l, int k);
+
+	ex fn_f (int l, int k);
+	ex fn_fminus (int l, int k);
+	DECLARE_FUNCTION_1P(myfn_f);//because there is if condition
+	DECLARE_FUNCTION_1P(myfn_fminus);//because there is if condition
+	
+	
+		ex fn_alpha (int l, int k);
+
 }	// Namespace xloops
 
 #endif 	// __XLOOPS_ONELOOP_4PT_LEV2_H__
