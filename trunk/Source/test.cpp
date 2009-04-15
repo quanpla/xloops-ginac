@@ -34,15 +34,38 @@ int main(){
 	init(q, p, Rho, Rho1, Rho2);
 	
 	// from here you can print any function you want, let have an example:
-	for (int l = 0; l<4; l++){
-		for (int k = 0; k<4; k++){
+	for (int l = 0; l<4; l++){for (int k = 0; k<4; k++){
 			if (l!=k)
 				cout << "a_" << l+1 << k+1 << " = " << fn_a(l, k) << "\t";
 			else
-				cout << "###\t";
+				cout << "    #    \t";
 		}
 		cout << endl;
 	}
-	
+	for (int l = 0; l<4; l++){for (int k = 0; k<4; k++){
+			if (l!=k)
+				cout << "b_" << l+1 << k+1 << " = " << fn_b(l, k) << "\t";
+			else
+				cout << "    #    \t";
+		}
+		cout << endl;
+	}
+		for (int l = 0; l<4; l++){for (int k = 0; k<4; k++){
+			if (l!=k)
+				cout << "c_" << l+1 << k+1 << " = " << fn_c(l, k) << "\t";
+			else
+				cout << "    #    \t";
+		}
+		cout << endl;
+	}
+		for (int l = 0; l<4; l++){for (int k = 0; k<4; k++){
+			if (l!=k)
+				cout << "d_" << l+1 << k+1 << " = " << fn_d(l, k) << "\t";
+			else
+				cout << "    #    \t";
+		}
+		cout << endl;
+	}
+		
 	return EXIT_SUCCESS;
 }
