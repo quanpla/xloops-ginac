@@ -15,13 +15,13 @@ void check0denom(const ex & denom, string varname, int index1, int index2, int i
 	if(my_is_zero(factor) == 1.0){
 		stringstream err_msg;
 		err_msg << varname << "_";
-		if (index1 > 0)
+		if (index1 >= 0)
 			err_msg << index1 + 1;
-		if (index2 > 0)
+		if (index2 >= 0)
 			err_msg << index2 + 1;
-		if (index3 > 0)
+		if (index3 >= 0)
 			err_msg << index3 + 1;
-		if (index4 > 0)
+		if (index4 >= 0)
 			err_msg << index4 + 1;
 		
 		err_msg << " denominator = 0";

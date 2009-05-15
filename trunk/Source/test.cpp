@@ -7,6 +7,9 @@
 #include "lev3.h"
 #include "lev4.h"
 #include "lev5.h"
+#include "RFunction.h"
+#include "ThetaG.h"
+#include "LogAG.h"
 #include "my_fns.h"
 
 using namespace std;
@@ -32,7 +35,7 @@ int main(){
 	Rho = 1e-20; Rho1 = 1e-21; Rho2 = 1e-23;
 	
 	init(q, p, Rho, Rho1, Rho2);
-	
+/*	
 	// from here you can print any function you want, let have an example:
 	for (int l = 0; l<4; l++){for (int k = 0; k<4; k++){
 			if (l!=k)
@@ -66,6 +69,7 @@ int main(){
 		}
 		cout << endl;
 	}
-		
+*/
+	cout << LogAG(1.0, 2.0, 4.0, 5.0);
 	return EXIT_SUCCESS;
 }

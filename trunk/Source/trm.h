@@ -41,8 +41,6 @@ namespace xloops{
 	//	I.1	Input Variables
 	ex mat_q[4][4], mat_msquare[4];
 
-	//	I.2	Output Variables
-	ex D0;	//Final Integrals
 
 }	// Namespace xloops
 

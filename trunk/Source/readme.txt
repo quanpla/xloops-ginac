@@ -1,6 +1,8 @@
 1./ Quick notes:
 To edit what to print to the screen, edit test.cpp, for example:
 	cout << fn_alpha(l, k);
+For D0, no need for include "Lev1", Lev2..., see the file testD0.cpp
+
 2./ File description:
 
 File            Description
@@ -25,6 +27,6 @@ trm.h           define the global variables
 
 test.cpp        The file that contains all PRINTABLE info
                 edit it as your pleasure.
+testD0.cpp	Only one call for D0, easy do it
 
-
-So you can edit: buildall.sh, test.cpp
+So you can edit: buildall.sh, test.cpp, testD0.cpp
