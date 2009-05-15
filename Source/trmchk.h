@@ -17,8 +17,8 @@
 **
 *******************************************************************************/
 
-#ifndef __XLOOPS_ONELOOP_4PT_TRM2F_H__
-#define __XLOOPS_ONELOOP_4PT_TRM2F_H__
+#ifndef __XLOOPS_ONELOOP_4PT_TRMCHK_H__
+#define __XLOOPS_ONELOOP_4PT_TRMCHK_H__
 
 #include <string>
 #include "ginac/ginac.h"
@@ -27,4 +27,4 @@ using namespace GiNaC;
 
 void check0denom(const ex & denom, std::string varname, int index1, int = -1, int = -1, int = -1);
 
-#endif 	// __XLOOPS_ONELOOP_4PT_TRM2F_H__
+#endif 	// __XLOOPS_ONELOOP_4PT_TRMCHK_H__

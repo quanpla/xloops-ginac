@@ -37,7 +37,10 @@ namespace xloops{
 	DECLARE_FUNCTION_1P(my_is_negative);
 	DECLARE_FUNCTION_1P(my_is_positive);
 
+	DECLARE_FUNCTION_1P(myfn_delta);
+
 	ex my_evalf(const ex &x);
+	ex myfn_eta(const ex &a, const ex &b); // eta function in the log
  
 	ex p2q(const ex &p); // convert p to q
 }	// Namespace xloops
