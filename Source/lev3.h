@@ -43,6 +43,10 @@ namespace xloops{
 	ex fn_Q (int m, int l, int k); ex fn_Q_im(int m, int l, int k); ex fn_Q_re(int m, int l, int k); ex fn_Q_conj(int m, int l, int k);
 	ex fn_P (int m, int l, int k);
 	ex fn_E (int m, int l, int k); ex fn_E_im(int m, int l, int k); ex fn_E_re(int m, int l, int k);
+
+	ex fn_A0 (int m, int l, int k);
+	ex fn_B0 (int m, int l, int k);
+	ex fn_C0 (int m, int l, int k);
 	ex fn_F(int n, int m, int l, int k); ex fn_F_im(int n, int m, int l, int k); 
 }	// Namespace xloops
 

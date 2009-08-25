@@ -52,11 +52,11 @@ REGISTER_FUNCTION(my_is_zero, eval_func(my_is_zero_eval));
 
 ex my_csgn_eval(const ex &x){
 	ex factor = x;
-
 	if (is_a<numeric>(factor)){
-		if (my_is_zero(factor) == 1)
-			return 0.0;
-		return csgn(x);
+	// for Khiem, x>=0: sign = 1, else -1
+		if (factor.info(info_flags::negative) == 1)
+			return -1.0;
+		return 1.0;
 	}
 	return my_csgn(x).hold();
 }
@@ -111,8 +111,24 @@ ex myfn_delta_eval(const ex &x){
 REGISTER_FUNCTION(myfn_delta, eval_func(myfn_delta_eval));
 
 ex myfn_eta(const ex &a, const ex &b){
-	ex Ima = imag_part(a), Imb = imag_part(b), Imab = imag_part(a*b);
-	return 2.0*Pi*I*( my_step(-Ima)*my_step(-Imb)*my_step(Imab) - my_step(Ima)*my_step(Imb)*my_step(-Imab) );
+	ex eta;
+	ex Ima = imag_part(a), Imb = imag_part(b), Imab = imag_part(a*b), Rea = real_part(a), Reb = real_part(b);
+	if (my_is_zero(Ima) && my_is_zero(Imb)){
+		if (my_isnegative(Rea))
+			eta = -2.0 * Pi * I * my_step(Imb);
+		else
+			eta = 0;
+	}
+	else if (my_is_zero(Imb)&&!my_is_zero(Ima)){
+		if (my_isnegative(Reb))
+			eta = -2.0 * Pi * I * my_step(Ima);
+		else
+			eta = 0;
+	}
+	else{
+		eta = 2.0*Pi*I*( my_step(-Ima)*my_step(-Imb)*my_step(Imab) - my_step(Ima)*my_step(Imb)*my_step(-Imab) );
+	}
+	return eta;
 }
 
 ex p2q(const ex &p){

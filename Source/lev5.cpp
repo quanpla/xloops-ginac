@@ -47,8 +47,8 @@ namespace xloops{
 	 // calculate
 		OPlus_nmlk = (f*g + fminus*g)*log(F/beta);
 		OPlus_nmlk += -2.0*Pi*I*( f*g + fminus*g )*my_step(imag_part(-P*z1beta/beta))*my_step(imag_part(z2beta));
-		OPlus_nmlk += 2.0*Pi*I*f*g*my_step(imag_part(P*phi*z1phi))*my_step(imag_part(z2phi));
-		OPlus_nmlk += -2.0*Pi*I*f*gminus*my_step(-imag_part(P*phi*z1phi))*my_step(-imag_part(z2phi));
+		OPlus_nmlk += 2.0*Pi*I*f*g*my_step(imag_part(-P*phi*z1phi))*my_step(imag_part(z2phi));
+		OPlus_nmlk += -2.0*Pi*I*f*gminus*my_step(imag_part(-P*phi*z1phi))*my_step(-imag_part(z2phi));
 	
 		return OPlus_nmlk;
 	}
@@ -65,7 +65,7 @@ namespace xloops{
 		OMinus_nmlk = -fminus*gminus*log(F/beta) - f*gminus*log(-F/beta);
 		OMinus_nmlk += 2.0*Pi*I*fminus*gminus*my_step(imag_part(-P*z1beta/beta))*my_step(imag_part(z2beta));
 		OMinus_nmlk += -2.0*Pi*I*f*gminus*my_step(imag_part(-P*z1beta/beta))*my_step(-imag_part(z2beta));
-		OMinus_nmlk += -2.0*Pi*I*(fminus*gminus + fminus*g)*my_step(-imag_part(P*phi*z1phi))*my_step(imag_part(z2phi));
+		OMinus_nmlk += -2.0*Pi*I*(fminus*gminus + fminus*g)*my_step(imag_part(-P*phi*z1phi))*my_step(imag_part(z2phi));
 	
 		return OMinus_nmlk;
 	}

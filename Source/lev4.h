@@ -35,17 +35,11 @@ using namespace std;
 namespace xloops{
 	ex fn_z1phi (int m, int l, int k);
 	ex fn_z2phi (int m, int l, int k);
-	ex fn_z3phi (int m, int l, int k);
-	ex fn_z4phi (int m, int l, int k);
 	ex fn_z1beta (int m, int l, int k);
 	ex fn_z2beta (int m, int l, int k);
-	ex fn_z3beta (int m, int l, int k);
-	ex fn_z4beta (int m, int l, int k);
 
 	ex fn_T1 (int n, int m, int l, int k);
 	ex fn_T2 (int n, int m, int l, int k);
-	ex fn_T3 (int n, int m, int l, int k);
-	ex fn_T4 (int n, int m, int l, int k);
 	
 }	// Namespace xloops
 
