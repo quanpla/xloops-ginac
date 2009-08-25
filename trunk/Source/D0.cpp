@@ -39,70 +39,60 @@
 using namespace GiNaC;
 
 namespace xloops{
-	// need to calculate coff
-ex fn_Coff(int n, int m, int l, int k){
-	ex AC = fn_AC(l, k), Amlk = fn_A(m, l, k), Bmlk = fn_B(m, l, k), Anlk = fn_A(n, l, k), Bnlk = fn_B(n, l, k), beta = fn_beta(m, l, k), phi = fn_phi(m, l, k);
-	ex coff = 0;
-
-	coff = I*pow(Pi, 2) * (1.0/AC) * ( 1.0/(Bmlk*Anlk-Bnlk*Amlk) )
-		* (1.0 - myfn_delta(AC)) * (1.0 - myfn_delta(Bmlk)) * abs(1.0 - beta*phi);
-
-	return coff;
+ex Jacobian(int n, int m, int l, int k){
+	ex beta_mlk = fn_beta(m, l, k), phi_mlk = fn_phi(m, l, k), AC_lk = fn_AC(l, k),
+		A_mlk = fn_A(m, l, k), A_nlk = fn_A(n, l, k),
+		B_mlk = fn_B(m, l, k), B_nlk = fn_B(n, l, k)
+		P_mlk = fn_P(m, l, k);
+	
+	return abs(1.0 - beta_mlk*phi_mlk) 
+		* (1.0 - myfn_delta(AC_lk)) 
+		* (1.0 - myfn_delta(B_mlk)) 
+		* (1.0/AC_lk)
+		* (1.0/( B_mlk*A_nlk-B_nlk*A_mlk ))
+		* (-1.0/P_mlk);
 }
 
-	// we need to calculate pos/ neg /ex term
-ex fn_PosTerm(int n, int m, int l, int k){
-	ex posTerm = 0;
-
-			// Intermidate terms
-	ex OPlus = fn_OPlus(n, m, l, k), T1 = fn_T1(n, m, l, k), T2 = fn_T2(n, m, l, k),
-		f = fn_f(l, k), fminus = fn_fminus(l, k), g = fn_g(m, l, k), gminus = fn_gminus(m, l, k),
+ex D0_part(int n, int m, int l, int k){
+	/* A part of D0 with index n, m, l, k*/
+	ex term;
+	
+	ex 	OPlus = fn_OPlus(n, m, l, k), OMinus = fn_OMinus(n, m, l, k),
+		T1 = fn_T1(n, m, l, k),	T2 = fn_T2(n, m, l, k),
+		f = fn_f(l, k), fminus = fn_fminus(l, k), g = fn_g(m, l, k), gminus = fn_gminus(m, l, k)
 		beta = fn_beta(m, l, k), phi = fn_phi(m, l, k),
-		F = fn_F(n, m, l, k), P = fn_P(m, l, k),
-		z1beta = fn_z1beta(m, l, k), z2beta = fn_z2beta(m, l, k),
-		z1phi = fn_z1phi(m, l, k), z2phi = fn_z2phi(m, l, k), Q = fn_Q(m, l, k);
-
-
-			// Calculate it:
-	posTerm = OPlus*RFunction(-T1, -T2) - f*g*LogAG((1.0-beta*phi)/beta, F/beta, -T1, -T2);
-	posTerm += - f*gminus*LogAG(-(1.0-beta*phi)/beta, -F/beta, -T1, -T2) - (f*g+fminus*g) * LogAG(-P/beta, P*z1beta/beta, -T1, -T2);
-	posTerm += -(f*g + fminus*g)*LogAG(1.0, -z2beta, -T1, -T2) + f*g*LogAG(-P*phi, P*phi*z1phi, -T1, -T2);
-	posTerm += f*g*LogAG(1.00, -z2phi, -T1, -T2) * f*gminus*LogAG(P*phi, -P*phi*z1phi, -T1, -T2);
-	posTerm += fminus*g*LogAG(1.0, -z2phi, -T1, -T2) + (fminus*g - f*gminus)*LogAG(P, Q, -T1, -T2);
-
-	return posTerm;
-}
-
-ex fn_NegTerm(int n, int m, int l, int k){
-	ex negTerm = 0;
-
-			// Intermidate terms
-	ex OMinus = fn_OMinus(n, m, l, k), T1 = fn_T1(n, m, l, k), T2 = fn_T2(n, m, l, k),
-		f = fn_f(l, k), fminus = fn_fminus(l, k), g = fn_g(m, l, k), gminus = fn_gminus(m, l, k), beta = fn_beta(m, l, k), phi = fn_phi(m, l, k),
-		F = fn_F(n, m, l, k), P = fn_P(m, l, k), z1beta = fn_z1beta(m, l, k), z2beta = fn_z2beta(m, l, k),
-		z1phi = fn_z1phi(m, l, k), z2phi = fn_z2phi(m, l, k), Q = fn_Q(m, l, k);
-
-
-			// Calculate it:
-	negTerm = OMinus*RFunction(T1, T2) + (fminus*gminus + fminus*g)*LogAG(-(1.0-beta*phi)/beta, F/beta, T1, T2);
-	negTerm += fminus*gminus*LogAG(P/beta, P*z1beta/beta, T1, T2) + fminus*gminus*LogAG(-1.0, -z2beta, T1, T2);
-	negTerm += f*gminus*LogAG(-P/beta, -P*z1beta/beta, T1, T2) + f*gminus*LogAG(-1.0, -z2beta, T1, T2);
-	negTerm += -(fminus*gminus + fminus*g)*LogAG(P*phi, P*phi*z1phi, T1, T2) - (fminus*gminus + fminus*g)*LogAG(-1.0, -z2phi, T1, T2);
-	negTerm += (fminus*g - f*gminus) * LogAG(-P, Q, T1, T2);
-
-	return negTerm;
-}
-
-ex fn_ExtraTerm(int n, int m, int l, int k){
-	ex extraTerm = 0;
-	ex f = fn_f(l, k), fminus = fn_fminus(l, k), g = fn_g(m, l, k), gminus = fn_gminus(m, l, k), ImQ = imag_part(fn_Q(m, l, k)), T1 = fn_T1(n, m, l, k), T2 = fn_T2(n, m, l, k), P = fn_P(m, l, k), E = fn_E(m, l, k), Q = fn_Q(m, l, k);
-	ex A0 = imag_part(P*E);
-	ex B0 = imag_part(E*Q.conjugate() - P*mat_msquare[k] + I*Rho*P);
-	ex C0 = imag_part((-mat_msquare[k] + I*Rho)*Q.conjugate());
-	extraTerm = 2.0*Pi*I*fminus*g*my_step(-ImQ)*ThetaG(A0, B0, C0, -T1, -T2);
-	extraTerm += 2.0*Pi*I*f*gminus*my_step(ImQ)*ThetaG(-A0,-B0,-C0,-T1,-T2);
-
-	return extraTerm;
+		z1beta = fn_z1beta(m, l, k), z2beta = fn_z2beta(m, l, k), z1phi = fn_z1phi(m, l, k), z2phi = fn_z2phi(m, l, k),
+		Q_im = fn_Q_im(m, l, k),
+		A0 = fn_A0(m, l, k), B0 = fn_B0(m, l, k), C0 = fn_C0(m, l, k)
+		F = fn_F(n, m, l, k);
+	
+	//	1.	No "Log" scalar
+	term = 	OPlus*RFunction(-T1, -T2)
+		+ 	OMinus*RFunction(T1, T2);
+	
+	// 	2.	Scalars with F_nmlk
+	term += (-f*g*LogAG( /*1st*/ ( 1.0 - beta*phi )/beta, /*2nd*/ F/beta, /*3rd*/ -T1, /*4th*/ -T2)
+		+	(fminus*gminus + fminus*g) * LogAG(/*1st*/ -( 1.0 - beta*phi )/beta, /*2nd*/ F/beta, /*3rd*/ T1, /*4th*/ T2)
+		-	f*gminus * LogAG(/*1st*/ -( 1.0 - beta*phi )/beta, /*2nd*/ -F/beta, /*3rd*/ -T1, /*4th*/ -T2);
+	
+	//	3.	Scalars with log but no F_nmlk
+	term += -(f*g + fminus*g) * LogAG( -P/beta, P*z1beta/beta, -T1, -T2)
+		-	(f*g + fminus*g) * LogAG(1.0, -z2beta, -T1, -T2)
+		+	f*g * LogAG(-P*phi, P*phi*z1phi, -T1, -T2)
+		+	f*g * LogAG(1.0, -z2phi, -T1, -T2)
+		+	f*gminus * LogAG(P*phi, -P*phi*z1phi, -T1, -T2)
+		+	f*gminus * LogAG(1.0, -z2phi, -T1, -T2)
+		+	(fminus*g - f*gminus) * LogAG(P, Q, -T1, -T2)
+		+	fminus*gminus * LogAG(P/beta, P*z1beta/beta, T1, T2)
+		+	fminus*gminus * LogAG(-1.0, -z2beta, T1, T2)
+		+	f*gminus * LogAG(-P/beta, -P*z1beta/beta, T1, T2)
+		+ 	f*gminus * LogAG(-1.0, -z2beta, T1, T2)
+		-	(fminus*gminus + fminus*g) * LogAG(P*phi, P*phi*z1phi, T1, T2)
+		-	(fminus*gminus + fminus*g) * LogAG(-1.0, -z2phi, T1, T2)
+		+	(fminus*g - f*gminus) * LogAG(-P, Q, T1, T2);
+	
+	//	4.	For M complex
+	term += my_step(Q_im) * fminus*g + my_step(Q_im)*f*g* ThetaGC(-A0, -B0, -C0, -T1, -T2) * 2.0 * Pi * I;
 }
 
 ex D0(const ex& q_, const ex& m_, const ex& Rho_, const ex& Rho1_, const ex& Rho2_){
@@ -118,9 +108,8 @@ ex D0(const ex& q_, const ex& m_, const ex& Rho_, const ex& Rho1_, const ex& Rho
 
 	for (int n=0; n<4; n++) for (int m=0; m<4; m++) for (int l=0; l<4; l++) for (int k=0; k<4; k++){
 		if(n!=m && n!=l && n!=k && m!=l && m!=k && l!=k){
-			ex coff = fn_C(m, l, k), posTerm = fn_PosTerm(n, m, l, k), negTerm = fn_NegTerm(n, m, l, k), extraTerm = fn_ExtraTerm(n, m, l, k);
-
-			return_D0 += coff*(posTerm+negTerm+extraTerm);
+			ex jacobi = Jacobian(n, m, l, k);
+			return_D0 += jacobi*D0_part(n, m, l, k);
 		}
 	}
 

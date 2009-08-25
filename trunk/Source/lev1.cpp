@@ -45,7 +45,8 @@ namespace xloops{
 		ex q_l1 = mat_q[l][1], q_k1 = mat_q[k][1];
 		
 		// calc.
-		return 2.0*(q_l1 - q_k1);
+		// 20090825, as for OneLoop4PtKhiemMain.cpp use minus sign
+		return -2.0*(q_l1 - q_k1);
 	}
 
 	ex fn_c (int l, int k){
@@ -53,7 +54,8 @@ namespace xloops{
 		ex q_l2 = mat_q[l][2], q_k2 = mat_q[k][2];
 		
 		// calc.
-		return 2.0*(q_l2 - q_k2);
+		// 20090825, as for OneLoop4PtKhiemMain.cpp use minus sign
+		return -2.0*(q_l2 - q_k2);
 	}
 
 	ex fn_d (int l, int k){

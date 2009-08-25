@@ -45,6 +45,19 @@ namespace xloops{
 		return AC_lk;
 	}
 
+	ex fn_alpha (int l, int k){
+		//init
+		ex alpha_lk;
+		ex AC_lk = fn_AC(l, k), b_lk = fn_a(l, k);
+		
+		check0denom(AC_lk, "alpha", l, k);
+		
+		// calc.
+		alpha_lk = b_lk / AC_lk;
+		
+		return alpha_lk;
+	}
+
 	ex fn_A (int m, int l, int k){
 		// init
 		ex A_mlk;
@@ -98,33 +111,15 @@ namespace xloops{
 
 	ex fn_D (int m, int l, int k){
 				// init
-		ex q_l0 = mat_q[l][0], q_l1 = mat_q[l][1], q_l2 = mat_q[l][2], q_l3 = mat_q[l][3],
-			q_k0 = mat_q[k][0], q_k1 = mat_q[k][1], q_k2 = mat_q[k][2], q_k3 = mat_q[k][3],
-			AC_lk = fn_AC(l, k);
+		ex a_lk = fn_a(l, k), AC_lk = fn_AC(l, k), alpha_lk = fn_alpha(l, k);
 
 		ex D_mlk;
 		
 		// calc.
-		D_mlk = -4.0* (pow(q_l0 - q_k0, 2) - pow(q_l1 - q_k1, 2) - pow(q_l2 - q_k2, 2) - pow(q_l3 - q_k3, 2))
-			/ pow(AC_lk, 2);
+		D_mlk = 1.0 - 2.0*a_lk/AC_lk + pow(alpha_lk ,2);
 		return D_mlk;
 	}
 
-
-	ex fn_alpha (int l, int k){
-		//init
-		ex alpha_lk;
-		ex a_lk = fn_a(l, k), b_lk = fn_a(l, k), c_lk = fn_c(l, k);
-		
-		check0denom(a_lk + c_lk, "alpha", l, k);
-		
-		// calc.
-		alpha_lk = b_lk / (a_lk + c_lk);
-		
-		return alpha_lk;
-	}
-	
-	
 	ex myfn_f_eval(const ex &factor){
 		if(is_a<numeric>(factor)){
 			if (my_is_zero(factor) == 1.0)
@@ -140,7 +135,7 @@ namespace xloops{
 	REGISTER_FUNCTION(myfn_f, eval_func(myfn_f_eval));
 
 	ex fn_f (int l, int k){
-		ex AC_lk = fn_AC(l, k), im_d_lk = fn_d(l, k);
+		ex AC_lk = fn_AC(l, k), im_d_lk = fn_d_im(l, k);
 
 		check0denom(AC_lk, "f", l, k);
 		
@@ -164,7 +159,7 @@ namespace xloops{
 
 	REGISTER_FUNCTION(myfn_fminus, eval_func(myfn_fminus_eval));
 	ex fn_fminus (int l, int k){
-		ex AC_lk = fn_AC(l, k), im_d_lk = fn_d(l, k);
+		ex AC_lk = fn_AC(l, k), im_d_lk = fn_d_im(l, k);
 		check0denom(AC_lk, "fminus", l, k);
 		
 		ex factor = - im_d_lk/AC_lk;
