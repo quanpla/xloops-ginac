@@ -42,7 +42,7 @@ namespace xloops{
 ex Jacobian(int n, int m, int l, int k){
 	ex beta_mlk = fn_beta(m, l, k), phi_mlk = fn_phi(m, l, k), AC_lk = fn_AC(l, k),
 		A_mlk = fn_A(m, l, k), A_nlk = fn_A(n, l, k),
-		B_mlk = fn_B(m, l, k), B_nlk = fn_B(n, l, k)
+		B_mlk = fn_B(m, l, k), B_nlk = fn_B(n, l, k),
 		P_mlk = fn_P(m, l, k);
 	
 	return abs(1.0 - beta_mlk*phi_mlk) 
@@ -59,11 +59,12 @@ ex D0_part(int n, int m, int l, int k){
 	
 	ex 	OPlus = fn_OPlus(n, m, l, k), OMinus = fn_OMinus(n, m, l, k),
 		T1 = fn_T1(n, m, l, k),	T2 = fn_T2(n, m, l, k),
-		f = fn_f(l, k), fminus = fn_fminus(l, k), g = fn_g(m, l, k), gminus = fn_gminus(m, l, k)
+		f = fn_f(l, k), fminus = fn_fminus(l, k), g = fn_g(m, l, k), gminus = fn_gminus(m, l, k),
 		beta = fn_beta(m, l, k), phi = fn_phi(m, l, k),
 		z1beta = fn_z1beta(m, l, k), z2beta = fn_z2beta(m, l, k), z1phi = fn_z1phi(m, l, k), z2phi = fn_z2phi(m, l, k),
 		Q_im = fn_Q_im(m, l, k),
-		A0 = fn_A0(m, l, k), B0 = fn_B0(m, l, k), C0 = fn_C0(m, l, k)
+		A0 = fn_A0(m, l, k), B0 = fn_B0(m, l, k), C0 = fn_C0(m, l, k),
+		P = fn_P(m, l, k), Q = fn_Q(m, l, k),
 		F = fn_F(n, m, l, k);
 	
 	//	1.	No "Log" scalar
@@ -71,7 +72,7 @@ ex D0_part(int n, int m, int l, int k){
 		+ 	OMinus*RFunction(T1, T2);
 	
 	// 	2.	Scalars with F_nmlk
-	term += (-f*g*LogAG( /*1st*/ ( 1.0 - beta*phi )/beta, /*2nd*/ F/beta, /*3rd*/ -T1, /*4th*/ -T2)
+	term += -	f*g*LogAG( /*1st*/ ( 1.0 - beta*phi )/beta, /*2nd*/ F/beta, /*3rd*/ -T1, /*4th*/ -T2)
 		+	(fminus*gminus + fminus*g) * LogAG(/*1st*/ -( 1.0 - beta*phi )/beta, /*2nd*/ F/beta, /*3rd*/ T1, /*4th*/ T2)
 		-	f*gminus * LogAG(/*1st*/ -( 1.0 - beta*phi )/beta, /*2nd*/ -F/beta, /*3rd*/ -T1, /*4th*/ -T2);
 	

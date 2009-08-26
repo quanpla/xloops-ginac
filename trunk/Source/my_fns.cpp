@@ -113,14 +113,14 @@ REGISTER_FUNCTION(myfn_delta, eval_func(myfn_delta_eval));
 ex myfn_eta(const ex &a, const ex &b){
 	ex eta;
 	ex Ima = imag_part(a), Imb = imag_part(b), Imab = imag_part(a*b), Rea = real_part(a), Reb = real_part(b);
-	if (my_is_zero(Ima) && my_is_zero(Imb)){
-		if (my_isnegative(Rea))
+	if (my_is_zero(Ima)==1 && my_is_zero(Imb)==1){
+		if (my_is_negative(Rea)==1)
 			eta = -2.0 * Pi * I * my_step(Imb);
 		else
 			eta = 0;
 	}
-	else if (my_is_zero(Imb)&&!my_is_zero(Ima)){
-		if (my_isnegative(Reb))
+	else if (my_is_zero(Imb)==1 && my_is_zero(Ima)==0){
+		if (my_is_negative(Reb)==1)
 			eta = -2.0 * Pi * I * my_step(Ima);
 		else
 			eta = 0;

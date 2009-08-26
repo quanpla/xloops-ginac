@@ -209,7 +209,7 @@ namespace xloops{
 
 	ex fn_B0 (int m, int l, int k){
 		ex B0_mlk;
-		ex Q_mlk_conj = fn_Q_conj(m, l, k), E_mlk = fn_E(m, l, k)
+		ex Q_mlk_conj = fn_Q_conj(m, l, k), E_mlk = fn_E(m, l, k),
 			msquare_k = mat_msquare[k], P_mlk = fn_P(m, l, k);
 		
 		// calc.
@@ -219,7 +219,7 @@ namespace xloops{
 
 	ex fn_C0 (int m, int l, int k){
 		ex B0_mlk;
-		ex Q_mlk_conj = fn_Q_conj(m, l, k), E_mlk = fn_E(m, l, k)
+		ex Q_mlk_conj = fn_Q_conj(m, l, k), E_mlk = fn_E(m, l, k),
 			msquare_k = mat_msquare[k], P_mlk = fn_P(m, l, k);
 		
 		// calc.
