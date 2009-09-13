@@ -48,6 +48,9 @@ namespace xloops{
 	ex fn_B0 (int m, int l, int k);
 	ex fn_C0 (int m, int l, int k);
 	ex fn_F(int n, int m, int l, int k); ex fn_F_im(int n, int m, int l, int k); 
+
+	void lev3Calc();
+	void lev3Calc(int debug);
 }	// Namespace xloops
 
 #endif 	// __XLOOPS_ONELOOP_4PT_LEV3_H__

@@ -41,6 +41,8 @@ namespace xloops{
 	ex fn_b (int l, int k);
 	ex fn_c (int l, int k);
 	ex fn_d (int l, int k); ex fn_d_re(int l, int k); ex fn_d_im(int l, int k); ex fn_d_conj(int l, int k);
+	void lev1Calc(); // calculate all the terms (matrix)
+	void lev1Calc(int debug); // calculate with debug info
 }	// Namespace xloops
 
 #endif 	// __XLOOPS_ONELOOP_4PT_LEV1_H__

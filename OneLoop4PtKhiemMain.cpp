@@ -140,10 +140,10 @@ int main(int argc, char *argv[])
 	ex p12s =150.0;//p_.op(4);
 	ex p23s = 10.0;//p_.op(5);
 	
-	ms[1] 	=  0*65610.0-0.0*I;//m_.op(0);
-	ms[2]	=  0*82810.0-0.0*I;//-I*rho2;//m_.op(1);
-	ms[3] 	=  0*6561.0-0.0*I;//-I*rho1;//m_.op(2);
-        ms[4]	= 0* 8281.0-0.0*I;//-I*rho2;//m_.op(3);
+	ms[1] 	=  65610.0-0.0*I;//m_.op(0);
+	ms[2]	=  82810.0-0.0*I;//-I*rho2;//m_.op(1);
+	ms[3] 	=  65610.0-0.0*I;//-I*rho1;//m_.op(2);
+        ms[4]	=  82810.0-0.0*I;//-I*rho2;//m_.op(3);
 	
 	ex m1s=ms[1],m2s=ms[2],m3s=ms[3],m4s=ms[4];
 	//ms[4]=m4s;
@@ -739,12 +739,12 @@ cout<<term4.evalf()<<endl;*/
 cout<<real_part(D0).evalf()<<"\t"<<imag_part(D0).evalf()<<endl;
 //cout <<"("<<real_part(D0).evalf()<<"," <<imag_part(D0).evalf()<<")"<<endl;
 //}
-/*cout << "Khiem's Code" << endl << "q_ij" << endl;
+cout << "Khiem's Code" << endl << "q_ij" << endl;
 		cout << q10 << "\t" << q11 << "\t" << q12 << "\t" << q13 << "\t" << endl;
 		cout << q20 << "\t" << q21 << "\t" << q22 << "\t" << q23 << "\t" << endl;
 		cout << q30 << "\t" << q31 << "\t" << q32 << "\t" << q33 << "\t" << endl;
 		cout << q40 << "\t" << q41 << "\t" << q42 << "\t" << q43 << "\t" << endl;
-		/*cout << "m_i square" << endl;
+		cout << "m_i square" << endl;
 		cout << m1s << "\t" << m2s << "\t" << m3s << "\t" << m4s << "\t" << endl;
 	
 		cout << "terms\t real part \t image part" << endl;
@@ -774,66 +774,66 @@ cout<<real_part(D0).evalf()<<"\t"<<imag_part(D0).evalf()<<endl;
 		for(k=1; k<=4; k++) for(l=1; l<=4; l++) if(l!=k) {
 			cout << "fminus_" << k << l << "\t" << real_part(fminus[k][l]) << "\t" << imag_part(fminus[k][l]) << endl;
 		} 
-		/*for(k=1; k<=4; k++) for(l=1; l<=4; l++) if(l!=k) for(m=1; m<=4; m++) if(m!=l && m!=k) {
-			cout << "A_" << m << k << l << "\t" << real_part(A[m][k][l]) << "\t" << imag_part(A[m][k][l]) << endl;
+		for(k=1; k<=4; k++) for(l=1; l<=4; l++) if(l!=k) for(m=1; m<=4; m++) if(m!=l && m!=k) {
+			cout << "A_" << k << l << m << "\t" << real_part(A[k][l][m]) << "\t" << imag_part(A[k][l][m]) << endl;
 		} 
 		for(k=1; k<=4; k++) for(l=1; l<=4; l++) if(l!=k) for(m=1; m<=4; m++) if(m!=l && m!=k) {
-			cout << "B_" << m << k << l << "\t" << real_part(B[m][k][l]) << "\t" << imag_part(B[m][k][l]) << endl;
+			cout << "B_" << k << l << m << "\t" << real_part(B[k][l][m]) << "\t" << imag_part(B[k][l][m]) << endl;
 		} 
 		for(k=1; k<=4; k++) for(l=1; l<=4; l++) if(l!=k) for(m=1; m<=4; m++) if(m!=l && m!=k) {
-			cout << "C_" << m << k << l << "\t" << real_part(C[m][k][l]) << "\t" << imag_part(C[m][k][l]) << endl;
+			cout << "C_" << k << l << m << "\t" << real_part(C[k][l][m]) << "\t" << imag_part(C[k][l][m]) << endl;
 		} 
 		for(k=1; k<=4; k++) for(l=1; l<=4; l++) if(l!=k) for(m=1; m<=4; m++) if(m!=l && m!=k) {
-			cout << "D_" << m << k << l << "\t" << real_part(D[m][k][l]) << "\t" << imag_part(D[m][k][l]) << endl;
-		} 
-		/*for(k=1; k<=4; k++) for(l=1; l<=4; l++) if(l!=k) for(m=1; m<=4; m++) if(m!=l && m!=k) {
-			cout << "beta_" << m << k << l << "\t" << real_part(beta[m][k][l]) << "\t" << imag_part(beta[m][k][l]) << endl;
+			cout << "D_" << k << l << m << "\t" << real_part(D[k][l][m]) << "\t" << imag_part(D[k][l][m]) << endl;
 		} 
 		for(k=1; k<=4; k++) for(l=1; l<=4; l++) if(l!=k) for(m=1; m<=4; m++) if(m!=l && m!=k) {
-			cout << "phi_" << m << k << l << "\t" << real_part(phi[m][k][l]) << "\t" << imag_part(phi[m][k][l]) << endl;
+			cout << "beta_" << k << l << m << "\t" << real_part(beta[k][l][m]) << "\t" << imag_part(beta[k][l][m]) << endl;
 		} 
 		for(k=1; k<=4; k++) for(l=1; l<=4; l++) if(l!=k) for(m=1; m<=4; m++) if(m!=l && m!=k) {
-			cout << "Q_" << m << k << l << "\t" << real_part(Q[m][k][l]) << "\t" << imag_part(Q[m][k][l]) << endl;
+			cout << "phi_" << k << l << m << "\t" << real_part(phi[k][l][m]) << "\t" << imag_part(phi[k][l][m]) << endl;
+		} 
+		for(k=1; k<=4; k++) for(l=1; l<=4; l++) if(l!=k) for(m=1; m<=4; m++) if(m!=l && m!=k) {
+			cout << "Q_" << k << l << m << "\t" << real_part(Q[k][l][m]) << "\t" << imag_part(Q[k][l][m]) << endl;
 		}
 		for(k=1; k<=4; k++) for(l=1; l<=4; l++) if(l!=k) for(m=1; m<=4; m++) if(m!=l && m!=k) {
-			cout << "P_" << m << k << l << "\t" << real_part(P[m][k][l]) << "\t" << imag_part(P[m][k][l]) << endl;
+			cout << "P_" << k << l << m << "\t" << real_part(P[k][l][m]) << "\t" << imag_part(P[k][l][m]) << endl;
 		} 
 		for(k=1; k<=4; k++) for(l=1; l<=4; l++) if(l!=k) for(m=1; m<=4; m++) if(m!=l && m!=k) {
-			cout << "E_" << m << k << l << "\t" << real_part(E[m][k][l]) << "\t" << imag_part(E[m][k][l]) << endl;
+			cout << "E_" << k << l << m << "\t" << real_part(E[k][l][m]) << "\t" << imag_part(E[k][l][m]) << endl;
 		}
 		for(k=1; k<=4; k++) for(l=1; l<=4; l++)if(l!=k) for(m=1; m<=4; m++)if(m!=l && m!=k) {
-			cout << "g_" << m << k << l << "\t" << real_part(g[m][k][l]) << "\t" << imag_part(g[m][k][l]) << endl;
+			cout << "g_" << k << l << m << "\t" << real_part(g[k][l][m]) << "\t" << imag_part(g[k][l][m]) << endl;
 		} 
 		for(k=1; k<=4; k++) for(l=1; l<=4; l++) if(l!=k) for(m=1; m<=4; m++) if(m!=l && m!=k) {
-			cout << "gminus_" << m << k << l << "\t" << real_part(gminus[m][k][l]) << "\t" << imag_part(gminus[m][k][l]) << endl;
-		} 
-		/*for(k=1; k<=4; k++) for(l=1; l<=4; l++) if (l!=k) for(m=1; m<=4; m++) if(m!=l && m!=k) for(n=1; n<=4; n++) if(n!=l && n!=k && n!=m){
-			cout << "F_" << n << m << l << k << "\t" << real_part(F[n][m][l][k]) << "\t" << imag_part(F[n][m][l][k]) << endl;
-		}
-		for(k=1; k<=4; k++) for(l=1; l<=4; l++) if(l!=k) for(m=1; m<=4; m++) if(m!=l && m!=k) {
-			cout << "z1beta_" << m << k << l << "\t" << real_part(z1beta[m][k][l]) << "\t" << imag_part(z1beta[m][k][l]) << endl;
-		} 
-		for(k=1; k<=4; k++) for(l=1; l<=4; l++) if(l!=k) for(m=1; m<=4; m++) if(m!=l && m!=k) {
-			cout << "z2beta_" << m << k << l << "\t" << real_part(z2beta[m][k][l]) << "\t" << imag_part(z2beta[m][k][l]) << endl;
-		} 
-		for(k=1; k<=4; k++) for(l=1; l<=4; l++) if(l!=k) for(m=1; m<=4; m++) if(m!=l && m!=k) {
-			cout << "z1phi_" << m << k << l << "\t" << real_part(z1phi[m][k][l]) << "\t" << imag_part(z1phi[m][k][l]) << endl;
-		} 
-		for(k=1; k<=4; k++) for(l=1; l<=4; l++) if(l!=k) for(m=1; m<=4; m++) if(m!=l && m!=k) {
-			cout << "z2phi_" << m << k << l << "\t" << real_part(z2phi[m][k][l]) << "\t" << imag_part(z2phi[m][k][l]) << endl;
+			cout << "gminus_" << k << l << m << "\t" << real_part(gminus[k][l][m]) << "\t" << imag_part(gminus[k][l][m]) << endl;
 		} 
 		for(k=1; k<=4; k++) for(l=1; l<=4; l++) if (l!=k) for(m=1; m<=4; m++) if(m!=l && m!=k) for(n=1; n<=4; n++) if(n!=l && n!=k && n!=m){
-			cout << "T1_" << n << m << l << k << "\t" << real_part(T1[n][m][l][k]) << "\t" << imag_part(T1[n][m][l][k]) << endl;
+			cout << "F_" << k << l << m << n << "\t" << real_part(F[k][l][m][n]) << "\t" << imag_part(F[k][l][m][n]) << endl;
+		}
+		for(k=1; k<=4; k++) for(l=1; l<=4; l++) if(l!=k) for(m=1; m<=4; m++) if(m!=l && m!=k) {
+			cout << "z1beta_" << k << l << m << "\t" << real_part(z1beta[k][l][m]) << "\t" << imag_part(z1beta[k][l][m]) << endl;
+		} 
+		for(k=1; k<=4; k++) for(l=1; l<=4; l++) if(l!=k) for(m=1; m<=4; m++) if(m!=l && m!=k) {
+			cout << "z2beta_" << k << l << m << "\t" << real_part(z2beta[k][l][m]) << "\t" << imag_part(z2beta[k][l][m]) << endl;
+		} 
+		for(k=1; k<=4; k++) for(l=1; l<=4; l++) if(l!=k) for(m=1; m<=4; m++) if(m!=l && m!=k) {
+			cout << "z1phi_" << k << l << m << "\t" << real_part(z1phi[k][l][m]) << "\t" << imag_part(z1phi[k][l][m]) << endl;
+		} 
+		for(k=1; k<=4; k++) for(l=1; l<=4; l++) if(l!=k) for(m=1; m<=4; m++) if(m!=l && m!=k) {
+			cout << "z2phi_" << k << l << m << "\t" << real_part(z2phi[k][l][m]) << "\t" << imag_part(z2phi[k][l][m]) << endl;
+		} 
+		for(k=1; k<=4; k++) for(l=1; l<=4; l++) if (l!=k) for(m=1; m<=4; m++) if(m!=l && m!=k) for(n=1; n<=4; n++) if(n!=l && n!=k && n!=m){
+			cout << "T1_" << k << l << m << n << "\t" << real_part(T1[k][l][m][n]) << "\t" << imag_part(T1[k][l][m][n]) << endl;
 		}
 		for(k=1; k<=4; k++) for(l=1; l<=4; l++) if (l!=k) for(m=1; m<=4; m++) if(m!=l && m!=k) for(n=1; n<=4; n++) if(n!=l && n!=k && n!=m){
-			cout << "T2_" << n << m << l << k << "\t" << real_part(T2[n][m][l][k]) << "\t" << imag_part(T2[n][m][l][k]) << endl;
+			cout << "T2_" << k << l << m << n << "\t" << real_part(T2[k][l][m][n]) << "\t" << imag_part(T2[k][l][m][n]) << endl;
 		}
 		for(k=1; k<=4; ++k) for(l=1; l<=4; ++l) if (l!=k) for(m=1; m<=4; ++m) if(m!=l && m!=k)for(n= 1; n<=4; n++) if(n!=l && n!=k && n!=m){
-	        cout << "Ominus["<< n << m << l << k <<"]"<< "\t" << real_part(Ominus[n][m][l][k])<< "\t" << imag_part(Ominus[n][m][l][k]).evalf() << endl;
+	        cout << "Ominus["<< k << l << m << n <<"]"<< "\t" << real_part(Ominus[k][l][m][n])<< "\t" << imag_part(Ominus[k][l][m][n]).evalf() << endl;
 		}
 		for(k=1; k<=4; ++k) for(l=1; l<=4; ++l) if (l!=k) for(m=1; m<=4; ++m) if(m!=l && m!=k)for(n= 1; n<=4; n++) if(n!=l && n!=k && n!=m){
-	        cout << "Oplus["<< n << m << l << k <<"]"<< "\t" << real_part(Oplus[n][m][l][k])<< "\t" << imag_part(Oplus[n][m][l][k]).evalf() << endl;
-		}*/
+	        cout << "Oplus["<< k << l << m << n <<"]"<< "\t" << real_part(Oplus[k][l][m][n])<< "\t" << imag_part(Oplus[k][l][m][n]).evalf() << endl;
+		}
 		
 return 0;
 

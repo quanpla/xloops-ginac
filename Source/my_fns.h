@@ -31,6 +31,7 @@ using namespace GiNaC;
 namespace xloops{
 	
 	/* I override some functions for the case of small argument. Those functions include: is_zero, csgn, step */
+/*
 	DECLARE_FUNCTION_1P(my_is_zero);
 	DECLARE_FUNCTION_1P(my_csgn);
 	DECLARE_FUNCTION_1P(my_step);
@@ -38,6 +39,13 @@ namespace xloops{
 	DECLARE_FUNCTION_1P(my_is_positive);
 
 	DECLARE_FUNCTION_1P(myfn_delta);
+*/
+	int my_is_zero(const ex &x);
+	int my_csgn(const ex &x);
+	int my_step(const ex &x);
+	int my_is_negative(const ex &x);
+	int my_is_positive(const ex &x);
+	int myfn_delta(const ex &x);
 
 	ex my_evalf(const ex &x);
 	ex myfn_eta(const ex &a, const ex &b); // eta function in the log
