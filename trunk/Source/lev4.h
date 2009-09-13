@@ -40,7 +40,9 @@ namespace xloops{
 
 	ex fn_T1 (int n, int m, int l, int k);
 	ex fn_T2 (int n, int m, int l, int k);
-	
+
+	void lev4Calc();
+	void lev4Calc(int debug);	
 }	// Namespace xloops
 
 #endif 	// __XLOOPS_ONELOOP_4PT_LEV4_H__

@@ -31,6 +31,7 @@ using namespace GiNaC;
 
 namespace xloops{
 	/*20090211: Quan added this function to substitue the Rho and evaluation*/
+
 ex my_evalf(const ex &x){
 	ex return_value;
 
@@ -39,6 +40,7 @@ ex my_evalf(const ex &x){
 	return return_value;
 }
 
+/*
 ex my_is_zero_eval(const ex &x){
 	ex factor = x;
 	if(is_a<numeric>(factor)){
@@ -49,7 +51,14 @@ ex my_is_zero_eval(const ex &x){
 	return my_is_zero(x).hold();
 }
 REGISTER_FUNCTION(my_is_zero, eval_func(my_is_zero_eval));
+*/
 
+int my_is_zero(const ex &x){
+	if(x.is_zero())
+		return 1;
+	return 0;
+}
+/*
 ex my_csgn_eval(const ex &x){
 	ex factor = x;
 	if (is_a<numeric>(factor)){
@@ -61,21 +70,32 @@ ex my_csgn_eval(const ex &x){
 	return my_csgn(x).hold();
 }
 REGISTER_FUNCTION(my_csgn, eval_func(my_csgn_eval));
-
+*/
+int my_csgn(const ex &x){
+	if(x.info(info_flags::negative) == 1)
+		return -1;
+	return 1;
+}
+/*
 ex my_step_eval(const ex &x){
 	ex factor = x;
 
-	if (is_a<numeric>(x)){
+	//if (is_a<numeric>(x)){
 		if (real_part(x) >= 0.0)
 			return 1.0;
 		else
 			return 0.0;
-	}
+	//}
 	return my_step(x).hold();
 }
 REGISTER_FUNCTION(my_step, eval_func(my_step_eval));
-
-
+*/
+int my_step(const ex &x){
+	if (x.info(info_flags::positive)==1)
+		return 1;
+	return 0;
+}
+/*
 ex my_is_positive_eval(const ex &x){
 	ex factor = x;
 
@@ -88,7 +108,13 @@ ex my_is_positive_eval(const ex &x){
 	return my_step(x).hold();
 }
 REGISTER_FUNCTION(my_is_positive, eval_func(my_is_positive_eval));
-
+*/
+int my_is_positive(const ex &x){
+	if(x.info(info_flags::positive)==1)
+		return 1;
+	return 0;
+}
+/*
 ex my_is_negative_eval(const ex &x){
 	ex factor = x;
 
@@ -101,7 +127,14 @@ ex my_is_negative_eval(const ex &x){
 	return my_step(x).hold();
 }
 REGISTER_FUNCTION(my_is_negative, eval_func(my_is_negative_eval));
+*/
+int my_is_negative(const ex &x){
+	if(x.info(info_flags::negative)==1)
+		return 1;
+	return 0;
+}
 
+/*
 ex myfn_delta_eval(const ex &x){
 	if (is_a<numeric>(x)){
 		return my_is_zero(x);
@@ -109,6 +142,10 @@ ex myfn_delta_eval(const ex &x){
 	else return myfn_delta(x).hold();
 }
 REGISTER_FUNCTION(myfn_delta, eval_func(myfn_delta_eval));
+*/
+int myfn_delta(const ex &x){
+	return my_is_zero(x);
+}
 
 ex myfn_eta(const ex &a, const ex &b){
 	ex eta;

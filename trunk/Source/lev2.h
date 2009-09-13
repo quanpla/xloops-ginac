@@ -50,6 +50,9 @@ namespace xloops{
 	
 		ex fn_alpha (int l, int k);
 
+	void lev2Calc();
+	void lev2Calc(int debug); // calculate with debug info
+
 }	// Namespace xloops
 
 #endif 	// __XLOOPS_ONELOOP_4PT_LEV2_H__

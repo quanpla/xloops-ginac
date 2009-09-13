@@ -37,6 +37,9 @@ namespace xloops{
 	// for linearize the integral more.
 	ex fn_OPlus (int n, int m, int l, int k);
 	ex fn_OMinus (int n, int m, int l, int k);
+
+	void lev5Calc();
+	void lev5Calc(int debug);
 }	// Namespace xloops
 
 #endif 	// __XLOOPS_ONELOOP_4PT_LEV5_H__
